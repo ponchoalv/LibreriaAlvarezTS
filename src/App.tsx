@@ -1,13 +1,24 @@
 import * as React from 'react';
-import MainLayout from './components/MainLayout'
+import { History } from 'history'
+import { ConnectedRouter } from 'connected-react-router'
+import routes from "./routes";
+import "open-iconic/font/css/open-iconic-bootstrap.min.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 
-class App extends React.Component {
-  public render() {
-    return (
-        <MainLayout />
-    );
-  }
+
+interface AppProps {
+    history: History;
+}
+
+class App extends React.Component<AppProps> {
+    public render() {
+        return (
+            <ConnectedRouter history={this.props.history}>
+                {routes}
+            </ConnectedRouter>
+        );
+    }
 }
 
 export default App;

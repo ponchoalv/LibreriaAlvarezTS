@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink as RRNavLink } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -36,17 +37,17 @@ export default class NavMenu extends React.Component<any, State> {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav vertical>
                         <NavItem className="px-3">
-                            <NavLink href="" active>
+                            <NavLink tag={RRNavLink} exact to="/" activeClassName="active">
                                 <span className="oi oi-home" aria-hidden="true"></span> Home
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink href="" >
+                            <NavLink tag={RRNavLink} to="/hello" activeClassName="active">
                                 <span className="oi oi-list-rich" aria-hidden="true"></span> Lista de Precios
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink href="" >
+                            <NavLink tag={RRNavLink} to="/upload" activeClassName="active">
                                 <span className="oi oi-cloud-upload" aria-hidden="true"></span> Cargar Lista de Precios
                             </NavLink>
                         </NavItem>

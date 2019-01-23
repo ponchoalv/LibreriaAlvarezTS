@@ -2,6 +2,7 @@ import * as constants from '../constants';
 
 export interface IncrementEnthusiasm {
     type: constants.INCREMENT_ENTHUSIASM;
+    payload: number;
 }
 
 export interface DecrementEnthusiasm {
@@ -10,9 +11,10 @@ export interface DecrementEnthusiasm {
 
 export type EnthusiasmAction = IncrementEnthusiasm | DecrementEnthusiasm;
 
-export function incrementEnthusiasm(): IncrementEnthusiasm {
+export function incrementEnthusiasm(step: number): IncrementEnthusiasm {
     return {
-        type: constants.INCREMENT_ENTHUSIASM
+        type: constants.INCREMENT_ENTHUSIASM,
+        payload: step
     }
 }
 

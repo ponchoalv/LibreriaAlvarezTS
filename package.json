@@ -1,13 +1,16 @@
 {
-  "name": "tuto-2",
+  "name": "libreria-alvarez",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.2.1",
+    "connected-react-router": "^6.2.2",
     "open-iconic": "^1.1.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "reactstrap": "^7.1.0",
     "redux": "^4.0.1"
@@ -19,12 +22,16 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/history": "^4.7.2",
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^7.0.0",
+    "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
     "@types/reactstrap": "^6.4.4",
     "typescript": "^3.2.4"
-  }
+  },
+  "proxy": "http://localhost:3030/"
 }
