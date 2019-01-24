@@ -1,10 +1,13 @@
+import { PriceRow } from "src/types";
 
-export default function api<T>(url: string): Promise<T> {
-    return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
-        return response.json();
-      })
+async function ApiTemplate<T>(url: string): Promise<T> {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return await response.json();
   }
+
+export function fetchPrices(date: string): Promise<Array<PriceRow>> {
+    return ApiTemplate<Array<PriceRow>>('api/prices-by-fecha?fecha=' + date);
+}
