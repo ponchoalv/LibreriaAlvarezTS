@@ -8,12 +8,18 @@ export function mapStateToProps({ prices }: StoreState) {
     return {
         prices: prices.prices,
         loading: prices.loading,
+        error: prices.error,
+        searchText: prices.searchText,
+        selectedList: prices.selectedList,
+        selectOptions: prices.selectOptions,
     }
 }
     
 export function mapDispatchToProps(dispatch: Dispatch<actions.PriceFetchAction>) {
     return {
         init: () => dispatch(actions.FetchPrices()),
+        updateSearchText: (value: string) => dispatch(actions.OnSearchTextUpdate(value)),
+        selectedListChanged: (value: string) => dispatch(actions.UpdateSelectedList(value)),
     }
 }
 

@@ -7,17 +7,27 @@ export interface EnthusiasmState {
 
 // objeto que responde GET /api/prices-by-fecha?fecha=2019-01-18
 export interface PriceRow {
-    desc: string;
-    code: string;
-    price: number;
-    lista: string;
-    fecha: Date;
+    readonly desc: string;
+    readonly code: string;
+    readonly price: number;
+    readonly lista: string;
+    readonly fecha: string;
+}
+
+export interface LoadedList {
+    readonly registros: number;
+    readonly lista: string;
+    readonly fecha: string;
 }
 
 export interface PricesState {
     readonly prices: Array<PriceRow>;
     readonly loading: boolean;
-    readonly error?: Error;
+    readonly error: Error | undefined;
+    readonly searchText: string;
+    readonly selectedList: string;
+    readonly selectOptions: Array<string>;
+    readonly allListOptions: Array<LoadedList>;
 }
 
 export interface StoreState {

@@ -3,12 +3,11 @@ import { PriceRow } from 'src/types';
 
 export interface Props {
     row: PriceRow;
-    index: number;
 }
 
-function TableRow({ row, index }: Props) {
+function TableRow({ row }: Props) {
      return (
-            <tr key={index}>
+            <tr>
                 <td>{row.desc}</td>
                 <td>{row.lista}</td>
                 <td>{formatter.format(row.price)}</td>

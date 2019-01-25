@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import { PriceRow } from "../types";
+import { PriceRow, LoadedList } from "../types";
 
 export interface IncrementEnthusiasm {
     type: constants.INCREMENT_ENTHUSIASM;
@@ -25,21 +25,43 @@ export function decrementEnthusiasm(): DecrementEnthusiasm {
     }
 }
 
+// List of prices events
 export interface InitPriceFetch {
     type: constants.INIT_FECTCH;
 }
 
 export interface SuccessfulPriceFetched {
-    type: constants.SUCCESSFUL_FETCH;
+    type: constants.SUCCESSFUL_PRICE_LIST_FETCH;
     data: Array<PriceRow>;
 }
 
-export interface FailedPriceFetched {
+export interface FailOnFetch {
     type: constants.FAILED_FETCH;
     error: Error;
 }
 
-export type PriceFetchAction = InitPriceFetch | SuccessfulPriceFetched | FailedPriceFetched;
+export interface UpdateSearchText {
+    type: constants.UPDATE_SEARCH_TEXT;
+    value: string;
+}
+
+export interface SuccessfulListsFectched {
+    type: constants.SUCCESSFUL_LIST_NAME_FETCH;
+    data: Array<LoadedList>;
+}
+
+export interface UpdateSelectedList {
+    type: constants.UPDATE_SELECTED_LIST;
+    value: string;
+}
+
+export type PriceFetchAction = 
+    | InitPriceFetch 
+    | SuccessfulPriceFetched 
+    | FailOnFetch 
+    | UpdateSearchText 
+    | SuccessfulListsFectched
+    | UpdateSelectedList;
 
 export function FetchPrices(): PriceFetchAction {
     return {
@@ -49,14 +71,37 @@ export function FetchPrices(): PriceFetchAction {
 
 export function LoadFetchedPrices(data: Array<PriceRow>): PriceFetchAction {
     return {
-        type: constants.SUCCESSFUL_FETCH,
+        type: constants.SUCCESSFUL_PRICE_LIST_FETCH,
         data,
     }
 }
 
-export function FaildOnFetchedPrices(error: Error): PriceFetchAction {
+export function FaildOnFetch(error: Error): PriceFetchAction {
     return {
         type: constants.FAILED_FETCH,
         error,
     }
 }
+
+export function OnSearchTextUpdate(value: string): PriceFetchAction {
+    return {
+        type: constants.UPDATE_SEARCH_TEXT,
+        value,
+    }
+}
+
+export function LoadFetchedLists(data: Array<LoadedList>) : PriceFetchAction {
+    return {
+        type: constants.SUCCESSFUL_LIST_NAME_FETCH,
+        data,
+    }
+}
+
+export function UpdateSelectedList(value: string) : PriceFetchAction {
+    return {
+        type: constants.UPDATE_SELECTED_LIST,
+        value,
+    }
+}
+
+
