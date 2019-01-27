@@ -18,7 +18,7 @@ function SelectList({ selectedList, selectOptions, selectedListChanged }: Props)
     return (
         <InputGroup>
             <InputGroupAddon addonType="prepend">Lista</InputGroupAddon>
-            <Input type="select" value={selectedList} onChange={onSelectedListChanged}>
+            <Input type="select" value={selectedList} onChange={onSelectedListChanged} className="custom-select">
                 <option value="">Todas</option>
                 {selectOptions.map((lista, index) => <option key={index} value={lista}>{lista}</option>)}
             </Input>

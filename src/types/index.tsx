@@ -28,10 +28,17 @@ export interface PricesState {
     readonly selectedList: string;
     readonly selectOptions: Array<string>;
     readonly allListOptions: Array<LoadedList>;
+    readonly selectedDate: DateOfList;
+    readonly datesLoaded: Array<DateOfList>;
 }
+
 
 export interface StoreState {
     readonly enthusiasm: EnthusiasmState;
     readonly prices: PricesState;
     readonly router: RouterState;
+}
+
+export interface DateOfList {
+    readonly fecha: string;
 }

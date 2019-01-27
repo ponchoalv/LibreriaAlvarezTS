@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import { PriceRow, LoadedList } from "../types";
+import { PriceRow, LoadedList, DateOfList } from "../types";
 
 export interface IncrementEnthusiasm {
     type: constants.INCREMENT_ENTHUSIASM;
@@ -55,13 +55,31 @@ export interface UpdateSelectedList {
     value: string;
 }
 
+export interface UpdateSelectedDate {
+    type: constants.UPDATE_SELECTED_DATE;
+    value: DateOfList;
+}
+
+export interface SuccessfulDatesFetched {
+    type: constants.SUCCESSFUL_DATES_FETCH;
+    data: Array<DateOfList>;
+}
+
+export interface SuccessfulLastListDateFetched {
+    type: constants.SUCCESSFUL_LAST_DATE_FETCH;
+    data: string;
+}
+
 export type PriceFetchAction = 
     | InitPriceFetch 
     | SuccessfulPriceFetched 
     | FailOnFetch 
     | UpdateSearchText 
     | SuccessfulListsFectched
-    | UpdateSelectedList;
+    | UpdateSelectedList
+    | SuccessfulDatesFetched
+    | SuccessfulLastListDateFetched
+    | UpdateSelectedDate;
 
 export function FetchPrices(): PriceFetchAction {
     return {
@@ -90,13 +108,6 @@ export function OnSearchTextUpdate(value: string): PriceFetchAction {
     }
 }
 
-export function LoadFetchedLists(data: Array<LoadedList>) : PriceFetchAction {
-    return {
-        type: constants.SUCCESSFUL_LIST_NAME_FETCH,
-        data,
-    }
-}
-
 export function UpdateSelectedList(value: string) : PriceFetchAction {
     return {
         type: constants.UPDATE_SELECTED_LIST,
@@ -104,4 +115,31 @@ export function UpdateSelectedList(value: string) : PriceFetchAction {
     }
 }
 
+export function UpdateSelectedDate(value: DateOfList) : PriceFetchAction {
+    return {
+        type: constants.UPDATE_SELECTED_DATE,
+        value,
+    }
+}
+
+export function LoadFetchedLists(data: Array<LoadedList>) : PriceFetchAction {
+    return {
+        type: constants.SUCCESSFUL_LIST_NAME_FETCH,
+        data,
+    }
+}
+
+export function LoadFetchedDates(data: Array<DateOfList>) : PriceFetchAction {
+    return {
+        type: constants.SUCCESSFUL_DATES_FETCH,
+        data,
+    }
+}
+
+export function LoadFetchedLastListDate(data:string) : PriceFetchAction {
+    return {
+        type: constants.SUCCESSFUL_LAST_DATE_FETCH,
+        data,
+    }
+}
 
