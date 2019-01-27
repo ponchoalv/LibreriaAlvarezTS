@@ -7,13 +7,15 @@
     "connected-react-router": "^6.2.2",
     "open-iconic": "^1.1.1",
     "react": "^16.7.0",
+    "react-data-export-wow": "^0.5.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "reactstrap": "^7.1.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "xlsx": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",

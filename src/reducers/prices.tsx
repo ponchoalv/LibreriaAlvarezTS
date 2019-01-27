@@ -46,59 +46,60 @@ const loadListByDate: (date: string) => ListCmd<PriceFetchAction> =
         batch: true
     });
 
-export const prices: LoopReducer<PricesState, PriceFetchAction> = (state: PricesState = initialState, action: PriceFetchAction): PricesState | Loop<PricesState, PriceFetchAction> => {
-    switch (action.type) {
-        case INIT_FECTCH:
-            return loop(
-                { ...state, loading: true }, 
-                loadLastListDate());
-        case SUCCESSFUL_PRICE_LIST_FETCH:
-            return {
-                ...state,
-                prices: action.data,
-                loading: false
-            };
-        case SUCCESSFUL_LIST_NAME_FETCH:
-            return {
-                ...state,
-                allListOptions: action.data,
-                selectOptions: action.data
-                    .filter(lists => lists.fecha === state.selectedDate.fecha)
-                    .map(row => row.lista),
-                loading: false
-            };
-        case SUCCESSFUL_LAST_DATE_FETCH:
-            return loop ({
-                ...state,
-                selectedDate: { fecha: action.data },
-            }, loadListByDate(action.data));
-        case SUCCESSFUL_DATES_FETCH:
-            return {
-                ...state,
-                datesLoaded: action.data,
-            };
-        case FAILED_FETCH:
-            return { ...state, error: action.error, loading: false };
-        case UPDATE_SEARCH_TEXT:
-            return {
-                ...state,
-                searchText: action.value
-            };
-        case UPDATE_SELECTED_LIST:
-            return {
-                ...state,
-                selectedList: action.value
-            };
-        case UPDATE_SELECTED_DATE:
-            return loop({
-                ...state,
-                selectedDate: action.value,
-                selectedList: "",
-                selectOptions: state.allListOptions
-                    .filter(lists => lists.fecha === action.value.fecha)
-                    .map(row => row.lista),
-                loading: true,
-            }, loadPrices(action.value.fecha))
+export const prices: LoopReducer<PricesState, PriceFetchAction> =
+    (state: PricesState = initialState, action: PriceFetchAction): PricesState | Loop<PricesState, PriceFetchAction> => {
+        switch (action.type) {
+            case INIT_FECTCH:
+                return loop(
+                    { ...state, loading: true },
+                    loadLastListDate());
+            case SUCCESSFUL_PRICE_LIST_FETCH:
+                return {
+                    ...state,
+                    prices: action.data,
+                    loading: false
+                };
+            case SUCCESSFUL_LIST_NAME_FETCH:
+                return {
+                    ...state,
+                    allListOptions: action.data,
+                    selectOptions: action.data
+                        .filter(lists => lists.fecha === state.selectedDate.fecha)
+                        .map(row => row.lista),
+                    loading: false
+                };
+            case SUCCESSFUL_LAST_DATE_FETCH:
+                return loop({
+                    ...state,
+                    selectedDate: { fecha: action.data },
+                }, loadListByDate(action.data));
+            case SUCCESSFUL_DATES_FETCH:
+                return {
+                    ...state,
+                    datesLoaded: action.data,
+                };
+            case FAILED_FETCH:
+                return { ...state, error: action.error, loading: false };
+            case UPDATE_SEARCH_TEXT:
+                return {
+                    ...state,
+                    searchText: action.value
+                };
+            case UPDATE_SELECTED_LIST:
+                return {
+                    ...state,
+                    selectedList: action.value
+                };
+            case UPDATE_SELECTED_DATE:
+                return loop({
+                    ...state,
+                    selectedDate: action.value,
+                    selectedList: "",
+                    selectOptions: state.allListOptions
+                        .filter(lists => lists.fecha === action.value.fecha)
+                        .map(row => row.lista),
+                    loading: true,
+                }, loadPrices(action.value.fecha))
+        }
+        return state;
     }
-    return state;
-}

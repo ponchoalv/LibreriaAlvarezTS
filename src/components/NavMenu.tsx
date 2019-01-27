@@ -38,22 +38,22 @@ export default class NavMenu extends React.Component<any, State> {
                     <Nav vertical>
                         <NavItem className="px-3">
                             <NavLink tag={RRNavLink} exact to="/" activeClassName="active">
-                                <span className="oi oi-home" aria-hidden="true"></span> Home
+                                <span className="oi oi-home" aria-hidden="true"></span>Home
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
                             <NavLink tag={RRNavLink} to="/enthusiasm" activeClassName="active">
-                                <span className="oi oi-list-rich" aria-hidden="true"></span> Lista de Precios
-                            </NavLink>
-                        </NavItem>
-                        <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} to="/upload" activeClassName="active">
-                                <span className="oi oi-cloud-upload" aria-hidden="true"></span> Lista de Precios
+                                <span className="oi oi-document" aria-hidden="true"></span>Tutorial TypeScript
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
                             <NavLink tag={RRNavLink} to="/list" activeClassName="active">
-                                <span className="oi oi-list-rich" aria-hidden="true"></span> Lista de Precios
+                                <span className="oi oi-list-rich" aria-hidden="true"></span>Lista de Precios
+                            </NavLink>
+                        </NavItem>
+                        <NavItem className="px-3">
+                            <NavLink tag={RRNavLink} to="/upload" activeClassName="active">
+                                <span className="oi oi-cloud-upload" aria-hidden="true"></span>Cargar Listas
                             </NavLink>
                         </NavItem>
                     </Nav>

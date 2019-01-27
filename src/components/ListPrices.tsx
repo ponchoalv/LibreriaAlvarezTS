@@ -6,6 +6,7 @@ import SearchInput from "./TableComponents/SearchInput";
 import { Container, Row, Col, Alert } from 'reactstrap';
 import SelectList from './TableComponents/SelectList';
 import SelectDate from './TableComponents/SelectDate';
+import ExcelDownloadButton from './TableComponents/ExcelExportButton';
 
 interface StateProps {
     prices: Array<PriceRow>;
@@ -75,6 +76,7 @@ class ListPrices extends React.Component<Props, {}> {
                         </Col>
                     </Row>
                 </Container>
+                <ExcelDownloadButton rows={this.props.prices} color="primary" buttonText="Descargar lista de precios completa"/>
             </div>
         );
     }
