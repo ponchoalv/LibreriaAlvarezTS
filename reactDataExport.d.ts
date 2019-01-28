@@ -1,7 +1,7 @@
 /* index.d.ts (C) react-data-export */
 
 // TypeScript Version: 2.2
-declare module 'react-data-export-wow' {
+declare module 'react-data-export' {
     import * as React from 'react'
   
     export interface ExcelFileProps {

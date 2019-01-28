@@ -2,22 +2,23 @@
   "name": "libreria-alvarez",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3030/",
   "dependencies": {
     "bootstrap": "^4.2.1",
     "connected-react-router": "^6.2.2",
     "open-iconic": "^1.1.1",
     "react": "^16.7.0",
-    "react-data-export-wow": "^0.5.0",
+    "react-data-export": "^0.5.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "reactstrap": "^7.1.0",
-    "redux": "^4.0.1",
-    "xlsx": "^0.14.1"
+    "redux": "^4.0.1"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
@@ -34,7 +35,8 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/reactstrap": "^6.4.4",
     "redux-loop": "^4.5.4",
-    "typescript": "^3.2.4"
-  },
-  "proxy": "http://localhost:3030/"
+    "source-map-explorer": "^1.6.0",
+    "typescript": "^3.2.4",
+    "xlsx": "^0.14.1"
+  }
 }

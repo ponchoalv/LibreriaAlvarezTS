@@ -1,7 +1,7 @@
 import * as React from "react";
 import { PriceRow } from 'src/types';
 import { Button } from 'reactstrap';
-import ReactExport from "react-data-export-wow";
+import ReactExport from "react-data-export";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
