@@ -22,16 +22,25 @@ declare module 'react-data-export' {
     export interface ExcelSheetData {
       xSteps?: number;
       ySteps?: number;
-      columns: Array<string>;
+      columns: Array<Columns>;
       data: Array<ExcelCellData>;
     }
   
-    export type ExcelCellData = ExcelValue | ExcelCell | Array<ExcelValue>;
+    export interface Columns {
+      title: string;
+      width: Width;
+    }
+
+    export interface Width {
+      wch: number;
+  }
+
+    export type ExcelCellData = ExcelValue | Array<ExcelCell> | Array<ExcelValue>;
     export type ExcelValue = string | number | Date | boolean;
   
     export interface ExcelCell {
-      value: ExcelCell;
-      style: ExcelStyle;
+      value: ExcelValue;
+      style?: ExcelStyle;
     }
   
     export interface ExcelColumnProps {
@@ -120,8 +129,6 @@ declare module 'react-data-export' {
       | "mediumDashDotDot"
       | "slantDashDot";
   
-
-
     export namespace ReactExport {
       export class ExcelFile extends React.Component<ExcelFileProps, any> {
       }
