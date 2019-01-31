@@ -15,9 +15,12 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-class UploadPrices extends React.Component<StateProps, {}> {
+class UploadPrices extends React.Component<Props, {}> {
     constructor(parameters: Props) {
         super(parameters)
+    }
+    componentDidMount(){
+        this.props.init();
     }
 
     render() {

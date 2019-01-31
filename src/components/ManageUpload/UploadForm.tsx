@@ -11,8 +11,14 @@ interface Props {
 }
 
 function UploadForm(props: Props) {
+
+    const uploadAction = (values: React.FormEvent<HTMLFormElement>) => {
+        var form = new FormData(values.currentTarget.value);
+
+    }
+
     return (
-        <Form>
+        <Form onSubmit={uploadAction}>
             <FormGroup>
                 <Label for="file">Planilla(.xlsx):</Label>
                 <Input type="file" name="file" id="file" accept=".xls,.xlsx" />
@@ -23,13 +29,13 @@ function UploadForm(props: Props) {
             <FormGroup>
                 <Label for="tipo-lista">Tipo de lista:</Label>
                 <Input type="text" name="tipo-lista" id="tipo-lista" />
-              </FormGroup>
+            </FormGroup>
             <FormGroup>
                 <Label for="nombre-lista">Nombre de lista:</Label>
                 <Input type="text" name="nombre-lista" id="nombre-lista" />
             </FormGroup>
-            <Input type="hidden" name="nombre-hoja" id="nombre-hoja" value="precios" />
-            <Input type="hidden" name="fecha" id="fecha" value={props.fecha} />
+            <Input type="hidden" name="nombre-hoja" value="precios" />
+            <Input type="text" name="fecha" value={props.fecha} />
             <Button>Subir planilla</Button>
         </Form>
     )
