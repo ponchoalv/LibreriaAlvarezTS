@@ -32,13 +32,16 @@ export interface PricesState {
     readonly datesLoaded: Array<DateOfList>;
 }
 
-
 export interface StoreState {
-    readonly enthusiasm: EnthusiasmState;
     readonly prices: PricesState;
     readonly router: RouterState;
 }
 
 export interface DateOfList {
     readonly fecha: string;
+}
+
+export interface ManageUploadState {
+    readonly filteredLists: Array<LoadedList>;
+    readonly selectedDate: DateOfList;
 }

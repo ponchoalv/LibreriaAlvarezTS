@@ -1,5 +1,4 @@
 import * as React from "react";
-import './Hello.css';
 import { PriceRow, DateOfList } from 'src/types';
 import PriceTable from "./TableComponents/PriceTable";
 import SearchInput from "./TableComponents/SearchInput";

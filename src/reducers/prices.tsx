@@ -2,7 +2,7 @@ import { fetchAllLists, fetchLastLists, fetchAllLoadedDates, fetchLastListDate }
 import { PriceFetchAction, LoadFetchedPrices, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, LoadFetchedLastListDate } from '../actions';
 import { PricesState } from '../types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd, ListCmd } from 'redux-loop';
-import { INIT_FECTCH, SUCCESSFUL_PRICE_LIST_FETCH, FAILED_FETCH, UPDATE_SEARCH_TEXT, SUCCESSFUL_LIST_NAME_FETCH, UPDATE_SELECTED_LIST, SUCCESSFUL_LAST_DATE_FETCH, SUCCESSFUL_DATES_FETCH, UPDATE_SELECTED_DATE } from '../constants/index';
+import * as constants from '../constants/index';
 
 const initialState: PricesState = {
     prices: [],
@@ -49,17 +49,17 @@ const loadListByDate: (date: string) => ListCmd<PriceFetchAction> =
 export const prices: LoopReducer<PricesState, PriceFetchAction> =
     (state: PricesState = initialState, action: PriceFetchAction): PricesState | Loop<PricesState, PriceFetchAction> => {
         switch (action.type) {
-            case INIT_FECTCH:
+            case constants.INIT_FECTCH:
                 return loop(
                     { ...state, loading: true },
                     loadLastListDate());
-            case SUCCESSFUL_PRICE_LIST_FETCH:
+            case constants.SUCCESSFUL_PRICE_LIST_FETCH:
                 return {
                     ...state,
                     prices: action.data,
                     loading: false
                 };
-            case SUCCESSFUL_LIST_NAME_FETCH:
+            case constants.SUCCESSFUL_LIST_NAME_FETCH:
                 return {
                     ...state,
                     allListOptions: action.data,
@@ -68,29 +68,29 @@ export const prices: LoopReducer<PricesState, PriceFetchAction> =
                         .map(row => row.lista),
                     loading: false
                 };
-            case SUCCESSFUL_LAST_DATE_FETCH:
+            case constants.SUCCESSFUL_LAST_DATE_FETCH:
                 return loop({
                     ...state,
                     selectedDate: { fecha: action.data },
                 }, loadListByDate(action.data));
-            case SUCCESSFUL_DATES_FETCH:
+            case constants.SUCCESSFUL_DATES_FETCH:
                 return {
                     ...state,
                     datesLoaded: action.data,
                 };
-            case FAILED_FETCH:
+            case constants.FAILED_FETCH:
                 return { ...state, error: action.error, loading: false };
-            case UPDATE_SEARCH_TEXT:
+            case constants.UPDATE_SEARCH_TEXT:
                 return {
                     ...state,
                     searchText: action.value
                 };
-            case UPDATE_SELECTED_LIST:
+            case constants.UPDATE_SELECTED_LIST:
                 return {
                     ...state,
                     selectedList: action.value
                 };
-            case UPDATE_SELECTED_DATE:
+            case constants.UPDATE_SELECTED_DATE:
                 return loop({
                     ...state,
                     selectedDate: action.value,

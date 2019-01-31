@@ -1,30 +1,6 @@
 import * as constants from '../constants';
 import { PriceRow, LoadedList, DateOfList } from "../types";
 
-export interface IncrementEnthusiasm {
-    type: constants.INCREMENT_ENTHUSIASM;
-    payload: number;
-}
-
-export interface DecrementEnthusiasm {
-    type: constants.DECREMENT_ENTHUSIASM;
-}
-
-export type EnthusiasmAction = IncrementEnthusiasm | DecrementEnthusiasm;
-
-export function incrementEnthusiasm(step: number): IncrementEnthusiasm {
-    return {
-        type: constants.INCREMENT_ENTHUSIASM,
-        payload: step
-    }
-}
-
-export function decrementEnthusiasm(): DecrementEnthusiasm {
-    return {
-        type: constants.DECREMENT_ENTHUSIASM
-    }
-}
-
 // List of prices events
 export interface InitPriceFetch {
     type: constants.INIT_FECTCH;

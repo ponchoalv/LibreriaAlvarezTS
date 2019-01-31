@@ -1,10 +1,9 @@
-import * as React from 'react'
-import { Route, Switch } from 'react-router'
-import Home from 'src/components/Home'
-import NoMatch from 'src/components/NoMatch'
-import Hello from 'src/containers/Hello'
+import * as React from 'react';
+import { Route, Switch } from 'react-router';
+import Home from 'src/components/Home';
+import NoMatch from 'src/components/NoMatch';
 import ListPrices from "src/containers/ListPrices";
-import NavMenu from 'src/components/NavMenu'
+import NavMenu from 'src/components/NavMenu';
 
 const routes = (
     <div className="app">
@@ -16,7 +15,6 @@ const routes = (
             <div className="content px-4">
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/enthusiasm" component={Hello} />
                     <Route path="/list" component={ListPrices} />
                     <Route component={NoMatch} />
                 </Switch>

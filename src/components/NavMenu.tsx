@@ -42,11 +42,6 @@ export default class NavMenu extends React.Component<any, State> {
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} to="/enthusiasm" activeClassName="active">
-                                <span className="oi oi-document" aria-hidden="true"></span>Tutorial TypeScript
-                            </NavLink>
-                        </NavItem>
-                        <NavItem className="px-3">
                             <NavLink tag={RRNavLink} to="/list" activeClassName="active">
                                 <span className="oi oi-list-rich" aria-hidden="true"></span>Lista de Precios
                             </NavLink>
