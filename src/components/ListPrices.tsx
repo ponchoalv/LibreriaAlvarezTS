@@ -32,12 +32,8 @@ class ListPrices extends React.Component<Props, {}> {
         super(props);
     }
 
-    init = () => {
-        this.props.init();
-    };
-
     componentDidMount() {
-        this.init();
+        this.props.init();
     }
 
     render() {

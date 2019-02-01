@@ -35,6 +35,7 @@ export interface PricesState {
 export interface StoreState {
     readonly prices: PricesState;
     readonly router: RouterState;
+    readonly upload: ManageUploadState;
 }
 
 export interface DateOfList {
@@ -42,6 +43,10 @@ export interface DateOfList {
 }
 
 export interface ManageUploadState {
+    readonly allLoadedLists: Array<LoadedList>;
     readonly filteredLists: Array<LoadedList>;
     readonly selectedDate: DateOfList;
+    readonly loading: boolean;
+    readonly error: Error | undefined;
+    readonly listsDateOptions: Array<DateOfList>;
 }

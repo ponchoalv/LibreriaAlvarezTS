@@ -9,39 +9,25 @@ interface StateProps {
     filteredlistOptions: Array<LoadedList>;
 }
 
-interface DispatchProps {
-    init(): () => void;
+type Props = StateProps;
+
+function UploadPrices(props: Props) {
+    return (
+        <Container>
+            <Table responsive>
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Lista</th>
+                        <th>Fecha</th>
+                        <th># Registros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.filteredlistOptions.map((row, index) => <TableRow row={row} key={index} />)}
+                </tbody>
+            </Table>
+            <UploadForm fecha={props.selectedDate.fecha} />
+        </Container>
+    )
 }
-
-type Props = StateProps & DispatchProps;
-
-class UploadPrices extends React.Component<Props, {}> {
-    constructor(parameters: Props) {
-        super(parameters)
-    }
-    componentDidMount(){
-        this.props.init();
-    }
-
-    render() {
-        return (
-            <Container>
-                <Table responsive>
-                    <thead className="thead-dark">
-                        <tr>
-                            <th>Lista</th>
-                            <th>Fecha</th>
-                            <th># Registros</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.filteredlistOptions.map((row, index) => <TableRow row={row} key={index} />)}
-                    </tbody>
-                </Table>
-                <UploadForm fecha={this.props.selectedDate.fecha} />
-            </Container>
-        )
-    }
-}
-
 export default UploadPrices;

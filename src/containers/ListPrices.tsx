@@ -1,4 +1,5 @@
-import * as actions from 'src/actions';
+import * as actions from 'src/actions/listPrices';
+import { PriceFetchAction } from 'src/actions';
 import { StoreState, DateOfList } from 'src/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -17,7 +18,7 @@ export function mapStateToProps({ prices }: StoreState) {
     }
 }
     
-export function mapDispatchToProps(dispatch: Dispatch<actions.PriceFetchAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<PriceFetchAction>) {
     return {
         init: () => dispatch(actions.FetchPrices()),
         updateSearchText: (value: string) => dispatch(actions.OnSearchTextUpdate(value)),

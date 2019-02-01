@@ -1,8 +1,9 @@
 import { fetchAllLists, fetchLastLists, fetchAllLoadedDates, fetchLastListDate } from "../api";
-import { PriceFetchAction, LoadFetchedPrices, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, LoadFetchedLastListDate } from '../actions';
-import { PricesState } from '../types/index';
+import { PriceFetchAction } from 'src/actions';
+import { LoadFetchedPrices, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, LoadFetchedLastListDate } from "src/actions/listPrices";
+import { PricesState } from 'src/types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd, ListCmd } from 'redux-loop';
-import * as constants from '../constants/index';
+import * as constants from 'src/constants/index';
 
 const initialState: PricesState = {
     prices: [],

@@ -14,7 +14,7 @@ function UploadForm(props: Props) {
 
     const uploadAction = (values: React.FormEvent<HTMLFormElement>) => {
         var form = new FormData(values.currentTarget.value);
-
+        console.log("Formulario => " + form.getAll);
     }
 
     return (

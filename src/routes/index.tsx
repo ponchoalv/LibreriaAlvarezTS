@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router';
 import Home from 'src/components/Home';
 import NoMatch from 'src/components/NoMatch';
 import ListPrices from "src/containers/ListPrices";
+import ManageUpload from "src/containers/ManageUpload";
 import NavMenu from 'src/components/NavMenu';
 
 const routes = (
@@ -16,6 +17,7 @@ const routes = (
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/list" component={ListPrices} />
+                    <Route path="/upload" component={ManageUpload} />
                     <Route component={NoMatch} />
                 </Switch>
             </div>

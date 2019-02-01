@@ -5,12 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App'
 import configureStore, { history } from './configureStore'
 
-const store = configureStore({
-  enthusiasm: {
-    enthusiasmLevel: 10,
-    languageName: 'Typescript',
-  }
-});
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
