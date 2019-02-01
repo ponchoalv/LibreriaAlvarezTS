@@ -11,7 +11,7 @@ export function mapStateToProps({ upload } : StoreState) {
         error: upload.error,
         selectedDate: upload.selectedDate,
         filteredlistOptions: upload.filteredLists,
-        listsDateOptions: upload.allLoadedLists
+        listsDateOptions: upload.listsDateOptions
     }
 }
     

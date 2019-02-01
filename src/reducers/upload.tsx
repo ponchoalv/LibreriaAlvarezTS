@@ -1,6 +1,6 @@
-import { fetchLastListDate, fetchAllLists } from "../api";
+import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates } from "../api";
 import { UploadListAction } from '../actions';
-import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists } from "src/actions/uploadActions";
+import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates } from "src/actions/uploadActions";
 import { ManageUploadState } from '../types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd } from 'redux-loop';
 import * as constants from '../constants/index';
@@ -24,7 +24,13 @@ const loadAllListNames: () => RunCmd<UploadListAction> =
     () => Cmd.run(fetchAllLists, {
         successActionCreator: LoadFetchedLists,
         failActionCreator: FaildOnFetch
-    })
+    });
+
+const loadAllDatesOptions: () => RunCmd<UploadListAction> =
+    () => Cmd.run(fetchAllLoadedDates,{
+        successActionCreator: LoadFetchedDates,
+        failActionCreator: FaildOnFetch
+    });
 
 export const upload: LoopReducer<ManageUploadState, UploadListAction> =
     (state: ManageUploadState = initialState, action: UploadListAction): ManageUploadState | Loop<ManageUploadState, UploadListAction> => {
@@ -34,7 +40,7 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
                     {
                         ...state,
                         loading: true,
-                    }, Cmd.list([loadLastListDate(), loadAllListNames()], {
+                    }, Cmd.list([loadLastListDate(), loadAllListNames(), loadAllDatesOptions()], {
                         batch: true
                     })
                 )
@@ -46,6 +52,11 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
                         .filter(lists => lists.fecha === state.selectedDate.fecha),
                     loading: false
                 };
+            case constants.SUCCESSFUL_DATES_FETCH:
+                return {
+                    ...state,
+                    listsDateOptions: action.data
+                }
             case constants.SUCCESSFUL_LAST_DATE_FETCH:
                 return loop({
                     ...state,

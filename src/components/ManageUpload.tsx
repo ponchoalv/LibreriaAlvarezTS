@@ -5,6 +5,9 @@ import UploadPrices from './ManageUpload/UploadPriceList';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import SelectDate from './TableComponents/SelectDate';
+import Container from 'reactstrap/lib/Container';
+//@ts-ignore
+import { Spinner } from 'reactstrap';
 
 interface StateProps {
     loading: boolean;
@@ -33,7 +36,7 @@ class ManageUpload extends React.Component<Props, {}> {
     render() {
 
         if (this.props.loading) {
-            return (<p><em>Cargando...</em></p>);
+            return ( <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" /> );
         }
 
         if (this.props.error) {
@@ -46,14 +49,19 @@ class ManageUpload extends React.Component<Props, {}> {
             <div>
                 <h1>Administrar la carga de listas</h1>
                 <p>Fecha selecionada: <b>{this.props.selectedDate.fecha}</b></p>
-                <Row>
-                    <Col>
-                        <SelectDate listsDateOptions={this.props.listsDateOptions} selectedDate={this.props.selectedDate} selectedDateChanged={this.props.selectedDateChanged} />
-                    </Col>
-                </Row>
-                <Row> 
-                    <UploadPrices selectedDate={this.props.selectedDate} filteredlistOptions={this.props.filteredlistOptions} />
-                </Row>
+                <Container>
+                    <Row>
+                        <Col sm={{ size: 4 }}  >
+                            <SelectDate listsDateOptions={this.props.listsDateOptions} selectedDate={this.props.selectedDate} selectedDateChanged={this.props.selectedDateChanged} />
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col>
+                            <UploadPrices selectedDate={this.props.selectedDate} filteredlistOptions={this.props.filteredlistOptions} />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }

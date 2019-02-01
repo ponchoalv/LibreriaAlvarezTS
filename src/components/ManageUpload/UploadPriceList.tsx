@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DateOfList, LoadedList } from 'src/types';
-import { Container, Table } from "reactstrap";
+import { Table } from "reactstrap";
 import TableRow from './TableRow';
 import UploadForm from './UploadForm';
 
@@ -13,7 +13,8 @@ type Props = StateProps;
 
 function UploadPrices(props: Props) {
     return (
-        <Container>
+        <div>
+            <h3>Planillas cargadas:</h3> 
             <Table responsive>
                 <thead className="thead-dark">
                     <tr>
@@ -26,8 +27,9 @@ function UploadPrices(props: Props) {
                     {props.filteredlistOptions.map((row, index) => <TableRow row={row} key={index} />)}
                 </tbody>
             </Table>
+            <br />
             <UploadForm fecha={props.selectedDate.fecha} />
-        </Container>
+        </div>
     )
 }
 export default UploadPrices;

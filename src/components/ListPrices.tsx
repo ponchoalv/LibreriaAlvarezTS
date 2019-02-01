@@ -6,6 +6,8 @@ import { Container, Row, Col, Alert } from 'reactstrap';
 import SelectList from './TableComponents/SelectList';
 import SelectDate from './TableComponents/SelectDate';
 import ExcelDownloadButton from './TableComponents/ExcelExportButton';
+//@ts-ignore
+import { Spinner } from 'reactstrap';
 
 interface StateProps {
     prices: Array<PriceRow>;
@@ -39,7 +41,7 @@ class ListPrices extends React.Component<Props, {}> {
     render() {
 
         if (this.props.loading) {
-            return (<p><em>Cargando...</em></p>);
+            return ( <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" /> )
         }
 
         if (this.props.error) {
@@ -54,14 +56,14 @@ class ListPrices extends React.Component<Props, {}> {
                 <p>Buscar entre <b>{this.props.prices.length}</b> articulos de librería y juguetes.</p>
                 <Container>
                     <Row>
-                        <Col>
+                        <Col sm={{ size: 4 }} >
                             <SearchInput searchText={this.props.searchText} updateSearch={this.props.updateSearchText} />
                         </Col>
-                        <Col>
+                        <Col sm={{ size: 4 }} >
                             <SelectList selectedList={this.props.selectedList} selectOptions={this.props.selectOptions} selectedListChanged={this.props.selectedListChanged} />
                         </Col>
-                        <Col>
-                            <SelectDate selectedDate={this.props.selectedDate} listsDateOptions={this.props.datesLoaded} selectedDateChanged={this.props.selectedDateChanged}/>
+                        <Col sm={{ size: 4 }} >
+                            <SelectDate selectedDate={this.props.selectedDate} listsDateOptions={this.props.datesLoaded} selectedDateChanged={this.props.selectedDateChanged} />
                         </Col>
                     </Row>
                     <br />
@@ -70,8 +72,8 @@ class ListPrices extends React.Component<Props, {}> {
                             <PriceTable rows={this.props.prices} searchText={this.props.searchText} selectedList={this.props.selectedList} />
                         </Col>
                     </Row>
+                    <ExcelDownloadButton rows={this.props.prices} color="primary" buttonText="Descargar lista de precios completa" />
                 </Container>
-                <ExcelDownloadButton rows={this.props.prices} color="primary" buttonText="Descargar lista de precios completa"/>
             </div>
         );
     }
