@@ -5,8 +5,9 @@ import SearchInput from "./TableComponents/SearchInput";
 import { Container, Row, Col } from 'reactstrap';
 import SelectList from './TableComponents/SelectList';
 import SelectDate from './TableComponents/SelectDate';
-import ExcelDownloadButton from './TableComponents/ExcelExportButton';
 import { ActivityAndErrorIndicator } from './commons/ActivityAndErrorIndicator';
+
+const LazyDownloadButton = React.lazy(() => import('./TableComponents/ExcelExportButton'))
 
 
 interface StateProps {
@@ -62,7 +63,7 @@ class ListPrices extends React.Component<Props, {}> {
                                 <PriceTable rows={this.props.prices} searchText={this.props.searchText} selectedList={this.props.selectedList} />
                             </Col>
                         </Row>
-                        <ExcelDownloadButton rows={this.props.prices} color="primary" buttonText="Descargar lista de precios completa" />
+                        <LazyDownloadButton rows={this.props.prices} color="primary" buttonText="Descargar lista de precios completa" />
                     </Container>
                 </div>
             </ActivityAndErrorIndicator>
