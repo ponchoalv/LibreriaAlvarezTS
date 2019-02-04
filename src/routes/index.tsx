@@ -6,10 +6,6 @@ import ListPrices from 'src/containers/ListPrices';
 import NoMatch from 'src/components/NoMatch';
 import NavMenu from 'src/components/NavMenu';
 
-
-// const ListPrices = React.lazy(() => import('src/containers/ListPrices'));
-// const ManageUpload = React.lazy(() => import('src/containers/ManageUpload'))
-
 const routes = (
     <div className="app">
         <NavMenu />

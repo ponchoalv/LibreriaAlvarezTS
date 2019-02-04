@@ -2,8 +2,8 @@ import * as React from 'react';
 import { PriceRow } from 'src/types';
 import { Table, Container } from 'reactstrap';
 import TableRow from "./TableRow";
+import LazyDownloadButton from "./LazyDownloadButton";
 
-const LazyDownloadButton = React.lazy(() => import('./ExcelExportButton'))
 
 
 export interface Props {
@@ -31,13 +31,11 @@ function PriceTable({ rows, searchText, selectedList }: Props) {
                     {filteredRows.map((row, index) => <TableRow row={row} key={index} />)}
                 </tbody>
             </Table>
-
             <div className="d-flex flex-row-reverse">
                 <div className="p-2"></div>
-                <LazyDownloadButton rows={filteredRows} color="info" buttonText="Descargar planilla con datos filtrados" />
+                <LazyDownloadButton fallback="Cargando..." rows={filteredRows} colorBoton="info" buttonText="Descargar planilla con datos filtrados" />
             </div>
         </Container>
-
     );
 }
 

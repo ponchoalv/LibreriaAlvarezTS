@@ -11,7 +11,7 @@ interface Props {
 export class ActivityAndErrorIndicator extends React.Component<Props> {
     render() {
         if (this.props.loading) {
-            return <Spinner style={{ width: '10rem', height: '10rem' }} type="grow" />
+            return <div className="loader"><Spinner style={{ width: '30rem', height: '30rem' }} type="grow" /></div>
         }
 
         if (this.props.error) {

@@ -10,10 +10,10 @@ const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 export interface Props {
     rows: Array<PriceRow>;
     buttonText: string;
-    color: string;
+    colorBoton: string;
 }
 
-function ExcelDownloadButton({ rows, buttonText, color }: Props) {
+function ExcelDownloadButton({ rows, buttonText, colorBoton }: Props) {
     const mapedData: Array<ExcelCellData> = 
         rows.map(row =>  [   
                 { value:row.desc, style: {border: {style: "medium" as ExcelBorderStyle, color: {}}}},
@@ -35,7 +35,7 @@ function ExcelDownloadButton({ rows, buttonText, color }: Props) {
     }];
 
     return (
-        <ExcelFile element={<Button color={color}>{buttonText}</Button>}>
+        <ExcelFile element={<Button color={colorBoton}>{buttonText}</Button>}>
             <ExcelSheet dataSet={excelDataSet} name="Precios" />
         </ExcelFile>
     );
