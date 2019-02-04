@@ -13,7 +13,7 @@ export interface Props {
 export default function LazyDownloadButton(props: Props) {
     return (
         <React.Suspense fallback={props.fallback}>
-            <LazyButton rows={props.rows} colorBoton="info" buttonText={props.buttonText} />
+            <LazyButton rows={props.rows} colorBoton={props.colorBoton} buttonText={props.buttonText} />
         </React.Suspense>
     )
 }

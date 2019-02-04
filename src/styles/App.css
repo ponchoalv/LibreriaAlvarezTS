@@ -134,7 +134,7 @@
     }
 }
 
-.loader div {
+.loader {
     display: -webkit-flexbox;
     display: -ms-flexbox;
     display: -webkit-flex;

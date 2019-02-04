@@ -3,7 +3,7 @@ import { PriceFetchAction } from 'src/actions';
 import { LoadFetchedPrices, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, LoadFetchedLastListDate } from "src/actions/listPrices";
 import { PricesState } from 'src/types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd, ListCmd } from 'redux-loop';
-import * as constants from 'src/constants/index';
+import * as constants from 'src/constants/listPrices';
 
 const initialState: PricesState = {
     prices: [],

@@ -1,5 +1,4 @@
 import * as actions from 'src/actions/uploadActions';
-import { UploadListAction } from 'src/actions';
 import { StoreState, DateOfList } from 'src/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -15,7 +14,7 @@ export function mapStateToProps({ upload } : StoreState) {
     }
 }
     
-export function mapDispatchToProps(dispatch: Dispatch<UploadListAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.UploadListAction>) {
     return {
         init: () => dispatch(actions.FetchLastDates()),
         selectedDateChanged: (value: DateOfList) => dispatch(actions.UpdateSelectedDate(value)),

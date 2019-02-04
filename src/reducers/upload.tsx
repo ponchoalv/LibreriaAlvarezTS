@@ -1,9 +1,8 @@
 import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates } from "../api";
-import { UploadListAction } from '../actions';
-import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates } from "src/actions/uploadActions";
+import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, UploadListAction } from "src/actions/uploadActions";
 import { ManageUploadState } from '../types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd } from 'redux-loop';
-import * as constants from '../constants/index';
+import * as constants from '../constants/manageLists';
 
 const initialState: ManageUploadState = {
     allLoadedLists: [],

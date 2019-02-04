@@ -1,6 +1,40 @@
-import { UploadListAction } from '.';
-import * as constants from '../constants';
+import * as constants from '../constants/manageLists';
 import { DateOfList, LoadedList } from 'src/types';
+
+
+export interface InitLastDateFetch {
+    type: constants.INIT_LAST_DATE_FETCH;
+}
+export interface FailOnFetch {
+    type: constants.FAILED_FETCH;
+    error: Error;
+}
+export interface SuccessfulListsFectched {
+    type: constants.SUCCESSFUL_LIST_NAME_FETCH;
+    data: Array<LoadedList>;
+}
+export interface UpdateSelectedDate {
+    type: constants.UPDATE_SELECTED_DATE;
+    value: DateOfList;
+}
+
+export interface SuccessfulDatesFetched {
+    type: constants.SUCCESSFUL_DATES_FETCH;
+    data: Array<DateOfList>;
+}
+
+export interface SuccessfulLastListDateFetched {
+    type: constants.SUCCESSFUL_LAST_DATE_FETCH;
+    data: string;
+}
+
+export type UploadListAction = 
+    | InitLastDateFetch
+    | SuccessfulLastListDateFetched
+    | FailOnFetch
+    | UpdateSelectedDate
+    | SuccessfulListsFectched
+    | SuccessfulDatesFetched;
 
 export function FetchLastDates () : UploadListAction {
     return {
