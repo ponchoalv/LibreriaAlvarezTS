@@ -92,7 +92,7 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
                     ...state,
                     loading: false,
                 }, Cmd.list([loadAllListNames(), loadAllDatesOptions()], {
-                    sequence: true
+                    batch: true
                 }))
             case constants.START_EDITING:
                 return {
@@ -113,8 +113,8 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     loading: false
-                }, Cmd.list([loadLastListDate(), loadAllListNames(), loadAllDatesOptions()], {
-                    sequence: true
+                }, Cmd.list([loadAllListNames(), loadAllDatesOptions()], {
+                    batch: true
                 }))
         }
         return state;

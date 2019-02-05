@@ -8,6 +8,7 @@ import SelectDate from './TableComponents/SelectDate';
 import Container from 'reactstrap/lib/Container';
 import { ActivityAndErrorIndicator } from './commons/ActivityAndErrorIndicator';
 import DatePicker from 'react-date-picker';
+import ButtonGroup from 'reactstrap/lib/ButtonGroup';
 
 interface StateProps {
     loading: boolean;
@@ -40,7 +41,11 @@ class ManageUpload extends React.Component<Props, {}> {
 
     dateChange = (date: Date) => {
         this.props.selectedDateChanged({ fecha: date.toISOString().split('T')[0] });
+    }
+
+    uploadForm = (form: FormData) => {
         this.props.stopEditing();
+        this.props.uploadForm(form);
     }
 
     render() {
@@ -49,25 +54,32 @@ class ManageUpload extends React.Component<Props, {}> {
                 <div>
                     <h1>Administrar la carga de listas</h1>
                     <p>Fecha selecionada: <b>{this.props.selectedDate.fecha}</b></p>
-                    <Container>
-                        <Row>
-                            <Col sm={{ size: 4 }}  >
-                                <SelectDate listsDateOptions={this.props.listsDateOptions} selectedDate={this.props.selectedDate} selectedDateChanged={this.props.selectedDateChanged} />
-                            </Col>
-                            {this.props.addingNewDate ? (
+                    <Container fluid>
+                        {this.props.addingNewDate ? (
+                            <Row>                               
                                 <Col sm={{ size: 4 }}>
-                                    <DatePicker onChange={this.dateChange} clearIcon={null} />
-                                </Col> ) : (
-                                <Col sm={{ size: 4 }}>
-                                    <Button color="info" onClick={this.props.startEditing}>Agregar Nueva Fecha</Button>
-                                </Col> 
-                                )
-                            }
-                        </Row>
+                                    <ButtonGroup>
+                                        <DatePicker onChange={this.dateChange} clearIcon={null} />
+                                        <Button color="danger" aria-label="Restablecer" onClick={() => this.props.stopEditing()}><span>X</span></Button>
+                                    </ButtonGroup>
+                                </Col>
+                            </Row>
+                        ) : (
+                                <Row>
+                                    <Col sm={{ size: 4 }}  >
+                                        <SelectDate listsDateOptions={this.props.listsDateOptions} selectedDate={this.props.selectedDate} selectedDateChanged={this.props.selectedDateChanged} />
+                                    </Col>
+                                    <Col sm={{ size: 4 }}>
+                                        <Button color="info" onClick={this.props.startEditing}>Agregar Nueva Fecha</Button>
+                                    </Col>
+                                </Row>
+                            )
+                        }
+
                         <br />
                         <Row>
                             <Col>
-                                <UploadPrices uploadForm={this.props.uploadForm} selectedDate={this.props.selectedDate} filteredlistOptions={this.props.filteredlistOptions} deleteList={this.props.deleteList} />
+                                <UploadPrices uploadForm={this.uploadForm} selectedDate={this.props.selectedDate} filteredlistOptions={this.props.filteredlistOptions} deleteList={this.props.deleteList} />
                             </Col>
                         </Row>
                     </Container>

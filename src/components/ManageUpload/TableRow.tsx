@@ -19,7 +19,7 @@ function TableRow({ row, deleteList }: Props) {
                 <td>{row.lista}</td>
                 <td>{row.fecha}</td>
                 <td>{row.registros}</td>
-                <td><Button color="danger" aria-label="Eliminar" onClick={() => deleteList({lista: row.lista, fecha: row.fecha})} ><span>x</span></Button></td>
+                <td><Button color="danger" aria-label="Eliminar" onClick={() => deleteList({lista: row.lista, fecha: row.fecha})} >Eliminar</Button></td>
             </tr>
     );
 }

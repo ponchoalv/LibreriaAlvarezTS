@@ -26,7 +26,7 @@ function UploadPrices(props: Props) {
                         <th>Lista</th>
                         <th>Fecha</th>
                         <th># Registros</th>
-                        <th>Eliminar</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
