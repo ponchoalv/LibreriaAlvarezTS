@@ -147,6 +147,20 @@
 }
 
 .home-logo {
+    animation-name: home-logo;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-timing-function: easy-in-out;
+    background-color: rgb(247, 247, 247);
+}
+
+@keyframes home-logo {
+    50% {
+    transform: scale(0.7,0.7);
+    }
+}
+
+.home {
     display: -webkit-flexbox;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -156,15 +170,4 @@
     -webkit-align-items: center;
     align-items: center;
     justify-content: center;
-    animation-name: home-logo;
-    animation-duration: 4s;
-    animation-iteration-count: 1;
-    animation-timing-function: easy-in-out;
 }
-
-@keyframes home-logo {
-    50% {
-    transform: scale(0.7,0.7);
-    }
-}
-
