@@ -18,6 +18,7 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.UploadListAction>)
     return {
         init: () => dispatch(actions.FetchLastDates()),
         selectedDateChanged: (value: DateOfList) => dispatch(actions.UpdateSelectedDate(value)),
+        uploadForm: (form: FormData) => dispatch(actions.UploadList(form)),
     }
 }
 

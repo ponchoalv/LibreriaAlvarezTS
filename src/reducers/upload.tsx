@@ -1,5 +1,5 @@
-import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates } from "../api";
-import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, UploadListAction } from "src/actions/uploadActions";
+import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates, cargarLista } from "../api";
+import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, UploadListAction, SuccessfulLoadedList } from "src/actions/uploadActions";
 import { ManageUploadState } from '../types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd } from 'redux-loop';
 import * as constants from '../constants/manageLists';
@@ -70,6 +70,20 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
                     filteredLists: state.allLoadedLists
                         .filter(lists => lists.fecha === action.value.fecha)
                 }, Cmd.none)
+            case constants.INIT_LIST_UPLOAD:
+                return loop({
+                    ...state,
+                    loading: true,
+                }, Cmd.run(cargarLista, {
+                    successActionCreator: SuccessfulLoadedList,
+                    failActionCreator: FaildOnFetch,
+                    args: [action.data]
+                }))
+            case constants.LIST_UPLOAD_SUCCESSFUL:
+                return loop({
+                    ...state,
+                    loading: false,
+                }, loadAllListNames())
         }
         return state;
     }

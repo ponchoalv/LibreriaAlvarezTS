@@ -1,5 +1,5 @@
 import * as constants from '../constants/manageLists';
-import { DateOfList, LoadedList } from 'src/types';
+import { DateOfList, LoadedList, LoadList } from 'src/types';
 
 
 export interface InitLastDateFetch {
@@ -28,17 +28,43 @@ export interface SuccessfulLastListDateFetched {
     data: string;
 }
 
+export interface InitListUpload {
+    type: constants.INIT_LIST_UPLOAD;
+    data: FormData;
+}
+
+export interface SuccessfulListUpload {
+    type: constants.LIST_UPLOAD_SUCCESSFUL;
+    data: LoadList
+}
+
 export type UploadListAction = 
     | InitLastDateFetch
     | SuccessfulLastListDateFetched
     | FailOnFetch
     | UpdateSelectedDate
     | SuccessfulListsFectched
-    | SuccessfulDatesFetched;
+    | SuccessfulDatesFetched
+    | InitListUpload
+    | SuccessfulListUpload;
 
-export function FetchLastDates () : UploadListAction {
+export function FetchLastDates (): UploadListAction {
     return {
         type: constants.INIT_LAST_DATE_FETCH
+    }
+}
+
+export function UploadList(data: FormData): UploadListAction {
+    return {
+        type: constants.INIT_LIST_UPLOAD,
+        data
+    }
+}
+
+export function SuccessfulLoadedList(data: LoadList): UploadListAction {
+    return {
+        type: constants.LIST_UPLOAD_SUCCESSFUL,
+        data,
     }
 }
 

@@ -9,7 +9,11 @@ interface StateProps {
     filteredlistOptions: Array<LoadedList>;
 }
 
-type Props = StateProps;
+interface DispatchProps {
+    uploadForm: (form: FormData) => void;
+}
+
+type Props = StateProps & DispatchProps;
 
 function UploadPrices(props: Props) {
     return (
@@ -28,7 +32,7 @@ function UploadPrices(props: Props) {
                 </tbody>
             </Table>
             <br />
-            <UploadForm fecha={props.selectedDate.fecha} />
+            <UploadForm uploadForm={props.uploadForm} fecha={props.selectedDate.fecha} />
         </div>
     )
 }

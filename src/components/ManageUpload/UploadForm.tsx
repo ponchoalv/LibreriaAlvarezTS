@@ -6,22 +6,23 @@ import Input from 'reactstrap/lib/Input';
 import FormText from 'reactstrap/lib/FormText';
 import Button from 'reactstrap/lib/Button';
 
-interface Props {
+
+interface DataProps {
     fecha: string;
 }
+
+interface DispatchProps {
+    uploadForm: (form: FormData) => void;
+}
+
+type Props = DataProps & DispatchProps;
 
 function UploadForm(props: Props) {
 
     const uploadAction = (event: any) => {
         event.preventDefault();
         var form = new FormData(event.currentTarget);
-        
-        console.log(form);
-
-        fetch('api/cargar-lista', {
-            method: 'POST',
-            body: form
-        });
+        props.uploadForm(form);
     }
 
     return (

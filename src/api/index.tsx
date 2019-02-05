@@ -1,4 +1,4 @@
-import { PriceRow, LoadedList, DateOfList } from "src/types";
+import { PriceRow, LoadedList, DateOfList, LoadList } from "src/types";
 
 async function ApiTemplate<T>(url: string): Promise<T> {
     const response = await fetch(url);
@@ -28,3 +28,15 @@ export function fetchAllLoadedDates(): Promise<Array<DateOfList>> {
     return ApiTemplate<Array<DateOfList>>('api/get-all-dates');
 }
 
+export async function cargarLista(form: FormData): Promise<LoadList> {
+    const response =  await fetch('api/cargar-lista', {
+        method: 'POST',
+        body: form
+    });
+
+    if(!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return await response.json();
+}

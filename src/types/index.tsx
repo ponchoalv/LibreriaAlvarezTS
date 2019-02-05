@@ -50,3 +50,7 @@ export interface ManageUploadState {
     readonly error: Error | undefined;
     readonly listsDateOptions: Array<DateOfList>;
 }
+
+export interface LoadList {
+    readonly success: boolean;
+}
