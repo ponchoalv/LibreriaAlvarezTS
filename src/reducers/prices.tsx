@@ -75,15 +75,15 @@ export const prices: LoopReducer<IPricesState, PriceFetchAction> =
                     loadLastListDate());
             case constants.SUCCESSFUL_PRICE_LIST_FETCH:
                 return {
-                    loading: false,
                     ...state,
+                    loading: false,
                     prices: action.data,
                 };
             case constants.SUCCESSFUL_LIST_NAME_FETCH:
                 return {
-                    loading: false,
                     ...state,
                     allListOptions: action.data,
+                    loading: false,
                     selectOptions: action.data
                         .filter(lists => lists.fecha === state.selectedDate.fecha)
                         .map(row => row.lista),
@@ -112,8 +112,8 @@ export const prices: LoopReducer<IPricesState, PriceFetchAction> =
                 };
             case constants.UPDATE_SELECTED_DATE:
                 return loop({
-                    loading: true,
                     ...state,
+                    loading: true,
                     selectOptions: state.allListOptions
                         .filter(lists => lists.fecha === action.value.fecha)
                         .map(row => row.lista),

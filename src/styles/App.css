@@ -157,7 +157,7 @@
     align-items: center;
     justify-content: center;
     animation-name: home-logo;
-    animation-duration: 2s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: easy-in-out;
 }
