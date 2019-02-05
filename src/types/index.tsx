@@ -1,12 +1,7 @@
 import { RouterState } from 'connected-react-router';
 
-export interface EnthusiasmState {
-    readonly languageName: string;
-    readonly enthusiasmLevel: number;
-}
-
 // objeto que responde GET /api/prices-by-fecha?fecha=2019-01-18
-export interface PriceRow {
+export interface IPriceRow {
     readonly desc: string;
     readonly code: string;
     readonly price: number;
@@ -14,49 +9,49 @@ export interface PriceRow {
     readonly fecha: string;
 }
 
-export interface LoadedList {
+export interface ILoadedList {
     readonly registros: number;
     readonly lista: string;
     readonly fecha: string;
 }
 
-export interface PricesState {
-    readonly prices: Array<PriceRow>;
+export interface IPricesState {
+    readonly prices: IPriceRow[];
     readonly loading: boolean;
     readonly error: Error | undefined;
     readonly searchText: string;
     readonly selectedList: string;
-    readonly selectOptions: Array<string>;
-    readonly allListOptions: Array<LoadedList>;
-    readonly selectedDate: DateOfList;
-    readonly datesLoaded: Array<DateOfList>;
+    readonly selectOptions: string[];
+    readonly allListOptions: ILoadedList[];
+    readonly selectedDate: IDateOfList;
+    readonly datesLoaded: IDateOfList[];
 }
 
-export interface StoreState {
-    readonly prices: PricesState;
+export interface IStoreState {
+    readonly prices: IPricesState;
     readonly router: RouterState;
-    readonly upload: ManageUploadState;
+    readonly upload: IManageUploadState;
 }
 
-export interface DateOfList {
+export interface IDateOfList {
     readonly fecha: string;
 }
 
-export interface ManageUploadState {
-    readonly allLoadedLists: Array<LoadedList>;
-    readonly filteredLists: Array<LoadedList>;
-    readonly selectedDate: DateOfList;
+export interface IManageUploadState {
+    readonly allLoadedLists: ILoadedList[];
+    readonly filteredLists: ILoadedList[];
+    readonly selectedDate: IDateOfList;
     readonly loading: boolean;
     readonly error: Error | undefined;
-    readonly listsDateOptions: Array<DateOfList>;
+    readonly listsDateOptions: IDateOfList[];
     addingNewDate: boolean;
 }
 
-export interface LoadList {
+export interface ILoadList {
     readonly success: boolean;
 }
 
-export interface DeleteListData {
+export interface IDeleteListData {
     readonly lista: string;
     readonly fecha: string;
 }

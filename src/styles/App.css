@@ -145,3 +145,26 @@
     align-items: center;
     justify-content: center;
 }
+
+.home-logo {
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+    animation-name: home-logo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: easy-in-out;
+}
+
+@keyframes home-logo {
+    50% {
+    transform: scale(0.7,0.7);
+    }
+}
+

@@ -1,4 +1,10 @@
-import { PriceRow, LoadedList, DateOfList, LoadList, DeleteListData } from "src/types";
+import {
+    IDateOfList,
+    IDeleteListData,
+    ILoadedList,
+    ILoadList,
+    IPriceRow
+    } from 'src/types';
 
 async function ApiTemplate<T>(url: string): Promise<T> {
     const response = await fetch(url);
@@ -8,30 +14,30 @@ async function ApiTemplate<T>(url: string): Promise<T> {
     return await response.json();
   }
 
-export async function fetchPrices(date: string): Promise<Array<PriceRow>> {
-    return await ApiTemplate<Array<PriceRow>>('api/prices-by-fecha?fecha=' + date);
+export async function fetchPrices(date: string): Promise<IPriceRow[]> {
+    return await ApiTemplate<IPriceRow[]>('api/prices-by-fecha?fecha=' + date);
 }
 
 export async function fetchLastListDate(): Promise<string> {
     return await ApiTemplate<string>('api/get-last-date');
 }
 
-export async function fetchLastLists(date: string): Promise<Array<PriceRow>> {
+export async function fetchLastLists(date: string): Promise<IPriceRow[]> {
     return await fetchPrices(date);
 }
 
-export function fetchAllLists(): Promise<Array<LoadedList>> {
-    return ApiTemplate<Array<LoadedList>>('api/get-all-loaded-lists');
+export function fetchAllLists(): Promise<ILoadedList[]> {
+    return ApiTemplate<ILoadedList[]>('api/get-all-loaded-lists');
 }
 
-export function fetchAllLoadedDates(): Promise<Array<DateOfList>> {
-    return ApiTemplate<Array<DateOfList>>('api/get-all-dates');
+export function fetchAllLoadedDates(): Promise<IDateOfList[]> {
+    return ApiTemplate<IDateOfList[]>('api/get-all-dates');
 }
 
-export async function cargarLista(form: FormData): Promise<LoadList> {
+export async function cargarLista(form: FormData): Promise<ILoadList> {
     const response =  await fetch('api/cargar-lista', {
-        method: 'POST',
-        body: form
+        body: form,
+        method: 'POST'
     });
 
     if(!response.ok) {
@@ -41,12 +47,12 @@ export async function cargarLista(form: FormData): Promise<LoadList> {
     return await response.json();
 }
 
-export async function eliminarLista(lista: DeleteListData): Promise<number> {
+export async function eliminarLista(lista: IDeleteListData): Promise<number> {
     const response =  await fetch('api/delete-list-by-date-and-name', {
-        method: 'POST',
         body: JSON.stringify(lista),
-        headers: { 'Content-type': 'application/json' }
-        });
+        headers: { 'Content-type': 'application/json' },
+        method: 'POST',
+    });
 
     if(!response.ok) {
         throw new Error(response.statusText);

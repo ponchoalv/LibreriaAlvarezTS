@@ -2,19 +2,19 @@ import * as React from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import {
     Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
     Nav,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
     NavItem,
     NavLink
-} from 'reactstrap';
+    } from 'reactstrap';
 
-interface State {
+interface IState {
     isOpen: boolean;
 }
 
-export default class NavMenu extends React.Component<any, State> {
+export default class NavMenu extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -22,38 +22,38 @@ export default class NavMenu extends React.Component<any, State> {
             isOpen: false
         };
     }
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
-    render() {
+    public render() {
         return (
             <div className="sidebar">
-                <Navbar className="top-row pl-4" dark>
+                <Navbar className="top-row pl-4" dark={true}>
                     <NavbarBrand href="/">Librería Álvarez</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                 </Navbar>
-                <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav vertical>
+                <Collapse isOpen={this.state.isOpen} navbar={true}>
+                    <Nav vertical={true}>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} exact to="/" activeClassName="active">
-                                <span className="oi oi-home" aria-hidden="true"></span>Home
+                            <NavLink tag={RRNavLink} exact={true} to="/" activeClassName="active">
+                                <span className="oi oi-home" aria-hidden="true" />Home
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
                             <NavLink tag={RRNavLink} to="/list" activeClassName="active">
-                                <span className="oi oi-list-rich" aria-hidden="true"></span>Lista de Precios
+                                <span className="oi oi-list-rich" aria-hidden="true" />Lista de Precios
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
                             <NavLink tag={RRNavLink} to="/upload" activeClassName="active">
-                                <span className="oi oi-cloud-upload" aria-hidden="true"></span>Cargar Listas
+                                <span className="oi oi-cloud-upload" aria-hidden="true" />Cargar Listas
                             </NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
             </div>
         );
+    }
+    private toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
 }

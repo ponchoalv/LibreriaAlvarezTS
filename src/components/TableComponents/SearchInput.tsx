@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
-export interface StateProps {
+export interface IStateProps {
     searchText: string;
 }
 
-export interface DispatchProps {
+export interface IDispatchProps {
     updateSearch: (value: string) => void;
 }
 
-export type Props = StateProps & DispatchProps;
+export type IProps = IStateProps & IDispatchProps;
 
-function SearchInput({ searchText, updateSearch }: Props) {
+function SearchInput({ searchText, updateSearch }: IProps) {
     const onUpdateInput = (event: React.FormEvent<HTMLInputElement>):void => updateSearch(event.currentTarget.value.toUpperCase());
     
     return (

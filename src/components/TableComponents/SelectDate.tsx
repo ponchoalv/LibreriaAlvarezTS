@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { DateOfList } from 'src/types';
+import { Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { IDateOfList } from 'src/types';
 
-export interface StateProps {
-    selectedDate: DateOfList;
-    listsDateOptions: Array<DateOfList>;
+export interface IStateProps {
+    selectedDate: IDateOfList;
+    listsDateOptions: IDateOfList[];
 }
 
-export interface DispatchProps {
-    selectedDateChanged: (value: DateOfList) => void;
+export interface IDispatchProps {
+    selectedDateChanged: (value: IDateOfList) => void;
 }
 
-export type Props = StateProps & DispatchProps;
+export type IProps = IStateProps & IDispatchProps;
 
-function SelectDate({ selectedDate, listsDateOptions, selectedDateChanged }: Props) {
+function SelectDate({ selectedDate, listsDateOptions, selectedDateChanged }: IProps) {
     const onSelectedDateChanged = (event: React.FormEvent<HTMLInputElement>): void => selectedDateChanged({fecha: event.currentTarget.value});
 
     return (

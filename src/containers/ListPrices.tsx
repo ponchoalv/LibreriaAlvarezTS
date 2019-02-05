@@ -1,29 +1,30 @@
-import * as actions from 'src/actions/listPrices';
-import { PriceFetchAction } from 'src/actions';
-import { StoreState, DateOfList } from 'src/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { PriceFetchAction } from 'src/actions';
+import * as actions from 'src/actions/listPrices';
 import ListPrices from 'src/components/ListPrices';
+import { IDateOfList, IStoreState } from 'src/types';
 
-export function mapStateToProps({ prices }: StoreState) {
+export function mapStateToProps({ prices }: IStoreState) {
     return {
-        prices: prices.prices,
-        loading: prices.loading,
+        datesLoaded: prices.datesLoaded,
         error: prices.error,
+        loading: prices.loading,
+        prices: prices.prices,
         searchText: prices.searchText,
-        selectedList: prices.selectedList,
         selectOptions: prices.selectOptions,
         selectedDate: prices.selectedDate,
-        datesLoaded: prices.datesLoaded,
+        selectedList: prices.selectedList,
     }
 }
     
 export function mapDispatchToProps(dispatch: Dispatch<PriceFetchAction>) {
     return {
         init: () => dispatch(actions.FetchPrices()),
-        updateSearchText: (value: string) => dispatch(actions.OnSearchTextUpdate(value)),
+        selectedDateChanged: (value: IDateOfList) => dispatch(actions.UpdateSelectedDate(value)),
         selectedListChanged: (value: string) => dispatch(actions.UpdateSelectedList(value)),
-        selectedDateChanged: (value: DateOfList) => dispatch(actions.UpdateSelectedDate(value)),
+        updateSearchText: (value: string) => dispatch(actions.OnSearchTextUpdate(value)),
+
     }
 }
 

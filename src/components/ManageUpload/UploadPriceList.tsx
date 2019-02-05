@@ -1,26 +1,26 @@
 import * as React from 'react';
-import { DateOfList, LoadedList, DeleteListData } from 'src/types';
-import { Table } from "reactstrap";
+import { Table } from 'reactstrap';
+import { IDateOfList, IDeleteListData, ILoadedList } from 'src/types';
 import TableRow from './TableRow';
 import UploadForm from './UploadForm';
 
-interface StateProps {
-    selectedDate: DateOfList;
-    filteredlistOptions: Array<LoadedList>;
+interface IStateProps {
+    selectedDate: IDateOfList;
+    filteredlistOptions: ILoadedList[];
 }
 
-interface DispatchProps {
+interface IDispatchProps {
     uploadForm: (form: FormData) => void;
-    deleteList: (list: DeleteListData) => void;
+    deleteList: (list: IDeleteListData) => void;
 }
 
-type Props = StateProps & DispatchProps;
+type IProps = IStateProps & IDispatchProps;
 
-function UploadPrices(props: Props) {
+function UploadPrices(props: IProps) {
     return (
         <div>
             <h3>Planillas cargadas:</h3> 
-            <Table responsive>
+            <Table responsive={true}>
                 <thead className="thead-dark">
                     <tr>
                         <th>Lista</th>

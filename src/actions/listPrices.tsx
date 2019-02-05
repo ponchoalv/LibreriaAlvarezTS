@@ -1,61 +1,61 @@
-import * as constants from "src/constants/listPrices";
-import { PriceRow, DateOfList, LoadedList } from "src/types";
+import * as constants from 'src/constants/listPrices';
+import { IDateOfList, ILoadedList, IPriceRow } from 'src/types';
 
 // List of prices events
 export interface InitPriceFetch {
     type: constants.INIT_FECTCH;
 }
 
-export interface SuccessfulPriceFetched {
+export interface ISuccessfulPriceFetched {
     type: constants.SUCCESSFUL_PRICE_LIST_FETCH;
-    data: Array<PriceRow>;
+    data: IPriceRow[];
 }
 
-export interface FailOnFetch {
+export interface IFailOnFetch {
     type: constants.FAILED_FETCH;
     error: Error;
 }
 
-export interface UpdateSearchText {
+export interface IUpdateSearchText {
     type: constants.UPDATE_SEARCH_TEXT;
     value: string;
 }
 
-export interface SuccessfulListsFectched {
+export interface ISuccessfulListsFectched {
     type: constants.SUCCESSFUL_LIST_NAME_FETCH;
-    data: Array<LoadedList>;
+    data: ILoadedList[];
 }
 
-export interface UpdateSelectedList {
+export interface IUpdateSelectedList {
     type: constants.UPDATE_SELECTED_LIST;
     value: string;
 }
 
-export interface UpdateSelectedDate {
+export interface IUpdateSelectedDate {
     type: constants.UPDATE_SELECTED_DATE;
-    value: DateOfList;
+    value: IDateOfList;
 }
 
-export interface SuccessfulDatesFetched {
+export interface ISuccessfulDatesFetched {
     type: constants.SUCCESSFUL_DATES_FETCH;
-    data: Array<DateOfList>;
+    data: IDateOfList[];
 }
 
-export interface SuccessfulLastListDateFetched {
+export interface ISuccessfulLastListDateFetched {
     type: constants.SUCCESSFUL_LAST_DATE_FETCH;
     data: string;
 }
 
 export type PriceFetchAction = 
     | InitPriceFetch 
-    | SuccessfulPriceFetched 
-    | FailOnFetch 
-    | UpdateSearchText 
-    | SuccessfulListsFectched
-    | UpdateSelectedList
-    | SuccessfulDatesFetched
-    | SuccessfulLastListDateFetched
-    | UpdateSelectedDate;
+    | ISuccessfulPriceFetched 
+    | IFailOnFetch 
+    | IUpdateSearchText 
+    | ISuccessfulListsFectched
+    | IUpdateSelectedList
+    | ISuccessfulDatesFetched
+    | ISuccessfulLastListDateFetched
+    | IUpdateSelectedDate;
 
 
 export function FetchPrices(): PriceFetchAction {
@@ -64,17 +64,18 @@ export function FetchPrices(): PriceFetchAction {
     }
 }
 
-export function LoadFetchedPrices(data: Array<PriceRow>): PriceFetchAction {
+export function LoadFetchedPrices(data: IPriceRow[]): PriceFetchAction {
     return {
-        type: constants.SUCCESSFUL_PRICE_LIST_FETCH,
         data,
+        type: constants.SUCCESSFUL_PRICE_LIST_FETCH,
+        
     }
 }
 
 export function FaildOnFetch(error: Error): PriceFetchAction {
     return {
-        type: constants.FAILED_FETCH,
         error,
+        type: constants.FAILED_FETCH,
     }
 }
 
@@ -92,30 +93,30 @@ export function UpdateSelectedList(value: string) : PriceFetchAction {
     }
 }
 
-export function UpdateSelectedDate(value: DateOfList) : PriceFetchAction {
+export function UpdateSelectedDate(value: IDateOfList) : PriceFetchAction {
     return {
         type: constants.UPDATE_SELECTED_DATE,
         value,
     }
 }
 
-export function LoadFetchedLists(data: Array<LoadedList>) : PriceFetchAction {
+export function LoadFetchedLists(data: ILoadedList[]) : PriceFetchAction {
     return {
-        type: constants.SUCCESSFUL_LIST_NAME_FETCH,
         data,
+        type: constants.SUCCESSFUL_LIST_NAME_FETCH,
     }
 }
 
-export function LoadFetchedDates(data: Array<DateOfList>) : PriceFetchAction {
+export function LoadFetchedDates(data: IDateOfList[]) : PriceFetchAction {
     return {
-        type: constants.SUCCESSFUL_DATES_FETCH,
         data,
+        type: constants.SUCCESSFUL_DATES_FETCH,
     }
 }
 
 export function LoadFetchedLastListDate(data:string) : PriceFetchAction {
     return {
-        type: constants.SUCCESSFUL_LAST_DATE_FETCH,
         data,
+        type: constants.SUCCESSFUL_LAST_DATE_FETCH,
     }
 }

@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 const NoMatch = () => (
-    <div>
-      No Match
+    <div className="loader">
+      La Pagina que estas buscando no existe
     </div>
   )
   

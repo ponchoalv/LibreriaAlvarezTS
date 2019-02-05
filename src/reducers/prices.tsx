@@ -1,45 +1,64 @@
-import { fetchAllLists, fetchLastLists, fetchAllLoadedDates, fetchLastListDate } from "../api";
+import {
+    Cmd,
+    ListCmd,
+    loop,
+    Loop,
+    LoopReducer,
+    RunCmd
+    } from 'redux-loop';
 import { PriceFetchAction } from 'src/actions';
-import { LoadFetchedPrices, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, LoadFetchedLastListDate } from "src/actions/listPrices";
-import { PricesState } from 'src/types/index';
-import { LoopReducer, Cmd, loop, Loop, RunCmd, ListCmd } from 'redux-loop';
+import {
+    FaildOnFetch,
+    LoadFetchedDates,
+    LoadFetchedLastListDate,
+    LoadFetchedLists,
+    LoadFetchedPrices
+    } from 'src/actions/listPrices';
 import * as constants from 'src/constants/listPrices';
+import { IPricesState } from 'src/types/index';
+import {
+    fetchAllLists,
+    fetchAllLoadedDates,
+    fetchLastListDate,
+    fetchLastLists
+    } from '../api';
 
-const initialState: PricesState = {
-    prices: [],
-    loading: false,
-    error: undefined,
-    searchText: "",
-    selectedList: "",
-    selectOptions: [],
+const initialState: IPricesState = {
     allListOptions: [],
+    datesLoaded: [], 
+    error: undefined,
+    loading: false,
+    prices: [],
+    searchText: "",
+    selectOptions: [],
     selectedDate: { fecha: "" },
-    datesLoaded: [],
+    selectedList: "",
 }
 
 const loadPrices: (date: string) => RunCmd<PriceFetchAction> =
     (date: string) => Cmd.run(fetchLastLists, {
-        successActionCreator: LoadFetchedPrices,
+        args: [date],
         failActionCreator: FaildOnFetch,
-        args: [date]
+        successActionCreator: LoadFetchedPrices,
+
     });
 
 const loadLists: () => RunCmd<PriceFetchAction> =
     () => Cmd.run(fetchAllLists, {
+        failActionCreator: FaildOnFetch,
         successActionCreator: LoadFetchedLists,
-        failActionCreator: FaildOnFetch
     });
 
 const loadDates: () => RunCmd<PriceFetchAction> =
     () => Cmd.run(fetchAllLoadedDates, {
+        failActionCreator: FaildOnFetch,
         successActionCreator: LoadFetchedDates,
-        failActionCreator: FaildOnFetch
     });
 
 const loadLastListDate: () => RunCmd<PriceFetchAction> =
     () => Cmd.run(fetchLastListDate, {
+        failActionCreator: FaildOnFetch,
         successActionCreator: LoadFetchedLastListDate,
-        failActionCreator: FaildOnFetch
     });
 
 const loadListByDate: (date: string) => ListCmd<PriceFetchAction> =
@@ -47,8 +66,8 @@ const loadListByDate: (date: string) => ListCmd<PriceFetchAction> =
         batch: true
     });
 
-export const prices: LoopReducer<PricesState, PriceFetchAction> =
-    (state: PricesState = initialState, action: PriceFetchAction): PricesState | Loop<PricesState, PriceFetchAction> => {
+export const prices: LoopReducer<IPricesState, PriceFetchAction> =
+    (state: IPricesState = initialState, action: PriceFetchAction): IPricesState | Loop<IPricesState, PriceFetchAction> => {
         switch (action.type) {
             case constants.INIT_FECTCH:
                 return loop(
@@ -56,18 +75,18 @@ export const prices: LoopReducer<PricesState, PriceFetchAction> =
                     loadLastListDate());
             case constants.SUCCESSFUL_PRICE_LIST_FETCH:
                 return {
+                    loading: false,
                     ...state,
                     prices: action.data,
-                    loading: false
                 };
             case constants.SUCCESSFUL_LIST_NAME_FETCH:
                 return {
+                    loading: false,
                     ...state,
                     allListOptions: action.data,
                     selectOptions: action.data
                         .filter(lists => lists.fecha === state.selectedDate.fecha)
                         .map(row => row.lista),
-                    loading: false
                 };
             case constants.SUCCESSFUL_LAST_DATE_FETCH:
                 return loop({
@@ -93,13 +112,13 @@ export const prices: LoopReducer<PricesState, PriceFetchAction> =
                 };
             case constants.UPDATE_SELECTED_DATE:
                 return loop({
+                    loading: true,
                     ...state,
-                    selectedDate: action.value,
-                    selectedList: "",
                     selectOptions: state.allListOptions
                         .filter(lists => lists.fecha === action.value.fecha)
                         .map(row => row.lista),
-                    loading: true,
+                    selectedDate: action.value,
+                    selectedList: "",
                 }, loadPrices(action.value.fecha))
         }
         return state;

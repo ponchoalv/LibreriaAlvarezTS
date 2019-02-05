@@ -1,46 +1,66 @@
-import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates, cargarLista, eliminarLista } from "../api";
-import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, UploadListAction, SuccessfulLoadedList, ListDeletedSuccessfuly } from "src/actions/uploadActions";
-import { ManageUploadState, DeleteListData } from '../types/index';
-import { LoopReducer, Cmd, loop, Loop, RunCmd } from 'redux-loop';
+import {
+    Cmd,
+    loop,
+    Loop,
+    LoopReducer,
+    RunCmd
+    } from 'redux-loop';
+import {
+    FaildOnFetch,
+    ListDeletedSuccessfuly,
+    LoadFetchedDates,
+    LoadFetchedLastListDate,
+    LoadFetchedLists,
+    SuccessfulLoadedList,
+    UploadListAction
+    } from 'src/actions/uploadActions';
+import {
+    cargarLista,
+    eliminarLista,
+    fetchAllLists,
+    fetchAllLoadedDates,
+    fetchLastListDate
+    } from '../api';
 import * as constants from '../constants/manageLists';
+import { IDeleteListData, IManageUploadState } from '../types/index';
 
-const initialState: ManageUploadState = {
-    allLoadedLists: [],
-    filteredLists: [],
-    selectedDate: { fecha: "" },
-    listsDateOptions: [],
-    error: undefined,
-    loading: true,
+const initialState: IManageUploadState = {
     addingNewDate: false,
+    allLoadedLists: [],
+    error: undefined,
+    filteredLists: [],
+    listsDateOptions: [],
+    loading: true,
+    selectedDate: { fecha: "" },
 }
 
 const loadLastListDate: () => RunCmd<UploadListAction> =
     () => Cmd.run(fetchLastListDate, {
+        failActionCreator: FaildOnFetch,
         successActionCreator: LoadFetchedLastListDate,
-        failActionCreator: FaildOnFetch
     });
 
 const loadAllListNames: () => RunCmd<UploadListAction> =
     () => Cmd.run(fetchAllLists, {
+        failActionCreator: FaildOnFetch,
         successActionCreator: LoadFetchedLists,
-        failActionCreator: FaildOnFetch
     });
 
 const loadAllDatesOptions: () => RunCmd<UploadListAction> =
     () => Cmd.run(fetchAllLoadedDates, {
+        failActionCreator: FaildOnFetch,
         successActionCreator: LoadFetchedDates,
-        failActionCreator: FaildOnFetch
     });
 
-const deleteList: (list: DeleteListData) => RunCmd<UploadListAction> =
-    (list: DeleteListData) => Cmd.run(eliminarLista, {
-        successActionCreator: ListDeletedSuccessfuly,
+const deleteList: (list: IDeleteListData) => RunCmd<UploadListAction> =
+    (list: IDeleteListData) => Cmd.run(eliminarLista, {
+        args: [list],
         failActionCreator: FaildOnFetch,
-        args: [list]
+        successActionCreator: ListDeletedSuccessfuly,
     })
 
-export const upload: LoopReducer<ManageUploadState, UploadListAction> =
-    (state: ManageUploadState = initialState, action: UploadListAction): ManageUploadState | Loop<ManageUploadState, UploadListAction> => {
+export const upload: LoopReducer<IManageUploadState, UploadListAction> =
+    (state: IManageUploadState = initialState, action: UploadListAction): IManageUploadState | Loop<IManageUploadState, UploadListAction> => {
         switch (action.type) {
             case constants.INIT_LAST_DATE_FETCH:
                 return loop(
@@ -74,18 +94,18 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
             case constants.UPDATE_SELECTED_DATE:
                 return loop({
                     ...state,
-                    selectedDate: action.value,
                     filteredLists: state.allLoadedLists
-                        .filter(lists => lists.fecha === action.value.fecha)
+                        .filter(lists => lists.fecha === action.value.fecha),
+                    selectedDate: action.value,
                 }, Cmd.none)
             case constants.INIT_LIST_UPLOAD:
                 return loop({
                     ...state,
                     loading: true,
                 }, Cmd.run(cargarLista, {
-                    successActionCreator: SuccessfulLoadedList,
+                    args: [action.data],
                     failActionCreator: FaildOnFetch,
-                    args: [action.data]
+                    successActionCreator: SuccessfulLoadedList,
                 }))
             case constants.LIST_UPLOAD_SUCCESSFUL:
                 return loop({

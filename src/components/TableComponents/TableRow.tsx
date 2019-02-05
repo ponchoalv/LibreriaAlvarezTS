@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { PriceRow } from 'src/types';
+import { IPriceRow } from 'src/types';
 
-export interface Props {
-    row: PriceRow;
+export interface IProps {
+    row: IPriceRow;
 }
 
-function TableRow({ row }: Props) {
+function TableRow({ row }: IProps) {
      return (
             <tr>
                 <td>{row.desc}</td>
@@ -19,7 +19,7 @@ function TableRow({ row }: Props) {
 export default TableRow;
 
 const formatter = new Intl.NumberFormat('es-AR', {
-    style: 'currency',
     currency: 'ARS',
-    minimumFractionDigits: 2
+    minimumFractionDigits: 2,
+    style: 'currency' 
 });

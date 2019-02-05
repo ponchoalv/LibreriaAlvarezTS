@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
-export interface StateProps {
+export interface IStateProps {
     selectedList: string;
-    selectOptions: Array<string>;
+    selectOptions: string[];
 }
 
-export interface DispatchProps {
+export interface IDispatchProps {
     selectedListChanged: (value: string) => void;
 }
 
-export type Props = StateProps & DispatchProps;
+export type IProps = IStateProps & IDispatchProps;
 
-function SelectList({ selectedList, selectOptions, selectedListChanged }: Props) {
+function SelectList({ selectedList, selectOptions, selectedListChanged }: IProps) {
     const onSelectedListChanged = (event: React.FormEvent<HTMLInputElement>): void => selectedListChanged(event.currentTarget.value.toUpperCase());
 
     return (

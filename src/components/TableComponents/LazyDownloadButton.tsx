@@ -1,16 +1,16 @@
 import * as React from "react";
-import { PriceRow } from 'src/types';
+import { IPriceRow } from 'src/types';
 
 const LazyButton= React.lazy(() => import('./ExcelExportButton'))
 
-export interface Props {
+export interface IProps {
     fallback: string;
-    rows: Array<PriceRow>;
+    rows: IPriceRow[];
     buttonText: string;
     colorBoton: string;
 }
 
-export default function LazyDownloadButton(props: Props) {
+export default function LazyDownloadButton(props: IProps) {
     return (
         <React.Suspense fallback={props.fallback}>
             <LazyButton rows={props.rows} colorBoton={props.colorBoton} buttonText={props.buttonText} />

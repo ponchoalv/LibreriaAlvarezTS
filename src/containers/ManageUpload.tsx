@@ -1,28 +1,28 @@
-import * as actions from 'src/actions/uploadActions';
-import { StoreState, DateOfList, DeleteListData } from 'src/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import * as actions from 'src/actions/uploadActions';
 import ManageUpload from 'src/components/ManageUpload';
+import { IDateOfList, IDeleteListData, IStoreState } from 'src/types';
 
-export function mapStateToProps({ upload } : StoreState) {
+export function mapStateToProps({ upload } : IStoreState) {
     return {
-        loading: upload.loading,
+        addingNewDate: upload.addingNewDate,
         error: upload.error,
-        selectedDate: upload.selectedDate,
         filteredlistOptions: upload.filteredLists,
         listsDateOptions: upload.listsDateOptions,
-        addingNewDate: upload.addingNewDate,
+        loading: upload.loading,
+        selectedDate: upload.selectedDate,
     }
 }
     
 export function mapDispatchToProps(dispatch: Dispatch<actions.UploadListAction>) {
     return {
+        deleteList: (list: IDeleteListData) => dispatch(actions.DeleteList(list)),
         init: () => dispatch(actions.FetchLastDates()),
-        selectedDateChanged: (value: DateOfList) => dispatch(actions.UpdateSelectedDate(value)),
-        uploadForm: (form: FormData) => dispatch(actions.UploadList(form)),
+        selectedDateChanged: (value: IDateOfList) => dispatch(actions.UpdateSelectedDate(value)),
         startEditing: () => dispatch(actions.StartEditing()),
         stopEditing: () => dispatch(actions.StopEditing()),
-        deleteList: (list: DeleteListData) => dispatch(actions.DeleteList(list))
+        uploadForm: (form: FormData) => dispatch(actions.UploadList(form)),
     }
 }
 

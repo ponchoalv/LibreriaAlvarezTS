@@ -1,44 +1,44 @@
-import * as React from "react";
-import { PriceRow, DateOfList } from 'src/types';
-import PriceTable from "./TableComponents/PriceTable";
-import SearchInput from "./TableComponents/SearchInput";
-import { Container, Row, Col } from 'reactstrap';
-import SelectList from './TableComponents/SelectList';
-import SelectDate from './TableComponents/SelectDate';
+import * as React from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import { IDateOfList, IPriceRow } from 'src/types';
 import { ActivityAndErrorIndicator } from './commons/ActivityAndErrorIndicator';
-import LazyDownloadButton from "./TableComponents/LazyDownloadButton";
+import LazyDownloadButton from './TableComponents/LazyDownloadButton';
+import PriceTable from './TableComponents/PriceTable';
+import SearchInput from './TableComponents/SearchInput';
+import SelectDate from './TableComponents/SelectDate';
+import SelectList from './TableComponents/SelectList';
 
 
-interface StateProps {
-    prices: Array<PriceRow>;
+interface IStateProps {
+    prices: IPriceRow[];
     loading: boolean;
     error: Error;
     searchText: string;
     selectedList: string;
-    selectOptions: Array<string>;
-    selectedDate: DateOfList;
-    datesLoaded: Array<DateOfList>;
+    selectOptions: string[];
+    selectedDate: IDateOfList;
+    datesLoaded: IDateOfList[];
 }
 
-interface DispatchProps {
+interface IDispatchProps {
     init: () => void;
     updateSearchText: (value: string) => void;
     selectedListChanged: (value: string) => void;
-    selectedDateChanged: (value: DateOfList) => void;
+    selectedDateChanged: (value: IDateOfList) => void;
 }
 
-export type Props = StateProps & DispatchProps;
+export type IProps = IStateProps & IDispatchProps;
 
-class ListPrices extends React.Component<Props, {}> {
-    constructor(props: Props) {
+class ListPrices extends React.Component<IProps, {}> {
+    constructor(props: IProps) {
         super(props);
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         this.props.init();
     }
 
-    render() {
+    public render() {
         return (
             <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error}>
                 <div>
@@ -68,6 +68,7 @@ class ListPrices extends React.Component<Props, {}> {
             </ActivityAndErrorIndicator>
         );
     }
+
 }
 
 export default ListPrices;

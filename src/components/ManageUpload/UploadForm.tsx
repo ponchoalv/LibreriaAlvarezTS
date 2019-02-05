@@ -1,27 +1,27 @@
 import * as React from 'react';
+import Button from 'reactstrap/lib/Button';
 import Form from 'reactstrap/lib/Form';
 import FormGroup from 'reactstrap/lib/FormGroup';
-import Label from 'reactstrap/lib/Label';
-import Input from 'reactstrap/lib/Input';
 import FormText from 'reactstrap/lib/FormText';
-import Button from 'reactstrap/lib/Button';
+import Input from 'reactstrap/lib/Input';
+import Label from 'reactstrap/lib/Label';
 
 
-interface DataProps {
+interface IDataProps {
     fecha: string;
 }
 
-interface DispatchProps {
+interface IDispatchProps {
     uploadForm: (form: FormData) => void;
 }
 
-type Props = DataProps & DispatchProps;
+type IProps = IDataProps & IDispatchProps;
 
-function UploadForm(props: Props) {
+function UploadForm(props: IProps) {
 
     const uploadAction = (event: any) => {
         event.preventDefault();
-        var form = new FormData(event.currentTarget);
+        const form = new FormData(event.currentTarget);
         props.uploadForm(form);
     }
 
@@ -45,7 +45,7 @@ function UploadForm(props: Props) {
                     <Input type="text" name="nombre-lista" id="nombre-lista" />
                 </FormGroup>
                 <Input type="hidden" name="nombre-hoja" value="precios" />
-                <Input type="text" name="fecha" value={props.fecha} readOnly />
+                <Input type="hidden" name="fecha" value={props.fecha} />
                 <br />
                 <Button color="primary">Subir Planilla</Button>
             </Form>

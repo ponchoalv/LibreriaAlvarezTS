@@ -1,25 +1,26 @@
 import * as React from 'react';
-import { LoadedList, DeleteListData } from 'src/types';
 import { Button } from 'reactstrap';
+import { IDeleteListData, ILoadedList } from 'src/types';
 
-interface StateProps {
-    row: LoadedList;
+interface IStateProps {
+    row: ILoadedList;
 }
 
-interface DispatchProps {
-    deleteList: (list: DeleteListData) => void;
+interface IDispatchProps {
+    deleteList: (list: IDeleteListData) => void;
 } 
 
-type Props = StateProps & DispatchProps;
+type IProps = IStateProps & IDispatchProps;
 
-function TableRow({ row, deleteList }: Props) {
+function TableRow({ row, deleteList }: IProps) {
+    const deleteListLocal = () =>  deleteList({lista: row.lista, fecha: row.fecha});
 
      return (
             <tr>
                 <td>{row.lista}</td>
                 <td>{row.fecha}</td>
                 <td>{row.registros}</td>
-                <td><Button color="danger" aria-label="Eliminar" onClick={() => deleteList({lista: row.lista, fecha: row.fecha})} >Eliminar</Button></td>
+                <td><Button color="danger" aria-label="Eliminar" onClick={deleteListLocal} >Eliminar</Button></td>
             </tr>
     );
 }

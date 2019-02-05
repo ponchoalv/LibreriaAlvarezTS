@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { PriceRow } from 'src/types';
-import { Table, Container } from 'reactstrap';
-import TableRow from "./TableRow";
-import LazyDownloadButton from "./LazyDownloadButton";
+import { Container, Table } from 'reactstrap';
+import { IPriceRow } from 'src/types';
+import LazyDownloadButton from './LazyDownloadButton';
+import TableRow from './TableRow';
 
 
 
-export interface Props {
-    rows: Array<PriceRow>;
+export interface IProps {
+    rows: IPriceRow[];
     searchText: string;
     selectedList: string;
 }
 
-function PriceTable({ rows, searchText, selectedList }: Props) {
-    const filteredRows: Array<PriceRow> = rows.filter(rowData => rowData.desc.includes(searchText) && (selectedList === "" || rowData.lista === selectedList))
+function PriceTable({ rows, searchText, selectedList }: IProps) {
+    const filteredRows: IPriceRow[] = rows.filter(rowData => rowData.desc.includes(searchText) && (selectedList === "" || rowData.lista === selectedList))
         .slice(0, 20);
 
     return (
         <Container>
-            <Table responsive>
+            <Table responsive={true}>
                 <thead className="thead-dark">
                     <tr>
                         <th>Descripción</th>
@@ -32,7 +32,7 @@ function PriceTable({ rows, searchText, selectedList }: Props) {
                 </tbody>
             </Table>
             <div className="d-flex flex-row-reverse">
-                <div className="p-2"></div>
+                <div className="p-2" />
                 <LazyDownloadButton fallback="Cargando..." rows={filteredRows} colorBoton="info" buttonText="Descargar planilla con datos filtrados" />
             </div>
         </Container>

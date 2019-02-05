@@ -1,16 +1,16 @@
-import { prices } from "./prices";
-import { upload } from "./upload"
-import { StoreState, PricesState, ManageUploadState } from "src/types";
-import { PriceFetchAction, UploadListAction } from "src/actions";
-import { combineReducers, LoopReducer  } from 'redux-loop';
-import { History } from 'history';
 import { connectRouter } from 'connected-react-router';
+import { History } from 'history';
+import { combineReducers, LoopReducer } from 'redux-loop';
+import { PriceFetchAction, UploadListAction } from 'src/actions';
+import { IManageUploadState, IPricesState, IStoreState } from 'src/types';
+import { prices } from './prices';
+import { upload } from './upload';
 
 
-const rootReducer = (history: History) => combineReducers<StoreState | LoopReducer<PricesState, PriceFetchAction> | LoopReducer<ManageUploadState, UploadListAction>>({
+const rootReducer = (history: History) => combineReducers<IStoreState | LoopReducer<IPricesState, PriceFetchAction> | LoopReducer<IManageUploadState, UploadListAction>>({
+    prices,
     router: connectRouter(history),
-    prices: prices,
-    upload: upload,
+    upload,
 })
 
 export default rootReducer

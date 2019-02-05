@@ -1,8 +1,9 @@
 import * as React from 'react'
+import  logo from "src/assets/logo-black.png";
 
 const Home = () => (
-  <div>
-    <h1>Hola Mundo Librería!</h1>
+  <div className="home-logo">
+    <img src={logo} alt="Librería Alvarez"/>
   </div>
 )
 

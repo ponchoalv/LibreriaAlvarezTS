@@ -1,29 +1,33 @@
-import * as constants from '../constants/manageLists';
-import { DateOfList, LoadedList, LoadList, DeleteListData } from 'src/types';
-
+import * as constants from 'src/constants/manageLists';
+import {
+    IDateOfList,
+    IDeleteListData,
+    ILoadedList,
+    ILoadList
+    } from 'src/types';
 
 export interface InitLastDateFetch {
     type: constants.INIT_LAST_DATE_FETCH;
 }
-export interface FailOnFetch {
+export interface IFailOnFetch {
     type: constants.FAILED_FETCH;
     error: Error;
 }
-export interface SuccessfulListsFectched {
+export interface ISuccessfulListsFectched {
     type: constants.SUCCESSFUL_LIST_NAME_FETCH;
-    data: Array<LoadedList>;
+    data: ILoadedList[];
 }
-export interface UpdateSelectedDate {
+export interface IUpdateSelectedDate {
     type: constants.UPDATE_SELECTED_DATE;
-    value: DateOfList;
+    value: IDateOfList;
 }
 
-export interface SuccessfulDatesFetched {
+export interface ISuccessfulDatesFetched {
     type: constants.SUCCESSFUL_DATES_FETCH;
-    data: Array<DateOfList>;
+    data: IDateOfList[];
 }
 
-export interface SuccessfulLastListDateFetched {
+export interface ISuccessfulLastListDateFetched {
     type: constants.SUCCESSFUL_LAST_DATE_FETCH;
     data: string;
 }
@@ -33,41 +37,41 @@ export interface InitListUpload {
     data: FormData;
 }
 
-export interface SuccessfulListUpload {
+export interface ISuccessfulListUpload {
     type: constants.LIST_UPLOAD_SUCCESSFUL;
-    data: LoadList
+    data: ILoadList
 }
 
-export interface StartEditing {
+export interface IStartEditing {
     type: constants.START_EDITING;
 }
 
-export interface StopEditing {
+export interface IStopEditing {
     type: constants.STOP_EDITING;
 }
 
-export interface DeleteList {
+export interface IDeleteList {
     type: constants.DELETE_LIST;
-    value: DeleteListData;
+    value: IDeleteListData;
 }
 
-export interface ListDeletedSuccessfuly {
+export interface IListDeletedSuccessfuly {
     type: constants.DELETE_LIST_SUCCESSFUL;
 }
 
 export type UploadListAction = 
     | InitLastDateFetch
-    | SuccessfulLastListDateFetched
-    | FailOnFetch
-    | UpdateSelectedDate
-    | SuccessfulListsFectched
-    | SuccessfulDatesFetched
+    | ISuccessfulLastListDateFetched
+    | IFailOnFetch
+    | IUpdateSelectedDate
+    | ISuccessfulListsFectched
+    | ISuccessfulDatesFetched
     | InitListUpload
-    | SuccessfulListUpload
-    | StartEditing
-    | StopEditing
-    | DeleteList
-    | ListDeletedSuccessfuly;
+    | ISuccessfulListUpload
+    | IStartEditing
+    | IStopEditing
+    | IDeleteList
+    | IListDeletedSuccessfuly;
 
 export function FetchLastDates (): UploadListAction {
     return {
@@ -77,47 +81,48 @@ export function FetchLastDates (): UploadListAction {
 
 export function UploadList(data: FormData): UploadListAction {
     return {
+        data,
         type: constants.INIT_LIST_UPLOAD,
-        data
+        
     }
 }
 
-export function SuccessfulLoadedList(data: LoadList): UploadListAction {
+export function SuccessfulLoadedList(data: ILoadList): UploadListAction {
     return {
-        type: constants.LIST_UPLOAD_SUCCESSFUL,
         data,
+        type: constants.LIST_UPLOAD_SUCCESSFUL,
     }
 }
 
 export function FaildOnFetch(error: Error): UploadListAction {
     return {
-        type: constants.FAILED_FETCH,
         error,
+        type: constants.FAILED_FETCH,
     }
 }
 
-export function LoadFetchedLists(data: Array<LoadedList>): UploadListAction {
+export function LoadFetchedLists(data: ILoadedList[]): UploadListAction {
     return {
-        type: constants.SUCCESSFUL_LIST_NAME_FETCH,
         data,
+        type: constants.SUCCESSFUL_LIST_NAME_FETCH,   
     }
 }
 
-export function LoadFetchedDates(data: Array<DateOfList>): UploadListAction {
+export function LoadFetchedDates(data: IDateOfList[]): UploadListAction {
     return {
+        data,
         type: constants.SUCCESSFUL_DATES_FETCH,
-        data,
     }
 }
 
 export function LoadFetchedLastListDate(data:string): UploadListAction {
     return {
-        type: constants.SUCCESSFUL_LAST_DATE_FETCH,
         data,
+        type: constants.SUCCESSFUL_LAST_DATE_FETCH,
     }
 }
 
-export function UpdateSelectedDate(value: DateOfList) : UploadListAction {
+export function UpdateSelectedDate(value: IDateOfList) : UploadListAction {
     return {
         type: constants.UPDATE_SELECTED_DATE,
         value,
@@ -136,7 +141,7 @@ export function StopEditing() : UploadListAction {
     }
 }
 
-export function DeleteList(value: DeleteListData) : UploadListAction {
+export function DeleteList(value: IDeleteListData) : UploadListAction {
     return {
         type: constants.DELETE_LIST,
         value
