@@ -1,5 +1,5 @@
 import * as constants from '../constants/manageLists';
-import { DateOfList, LoadedList, LoadList } from 'src/types';
+import { DateOfList, LoadedList, LoadList, DeleteListData } from 'src/types';
 
 
 export interface InitLastDateFetch {
@@ -38,6 +38,23 @@ export interface SuccessfulListUpload {
     data: LoadList
 }
 
+export interface StartEditing {
+    type: constants.START_EDITING;
+}
+
+export interface StopEditing {
+    type: constants.STOP_EDITING;
+}
+
+export interface DeleteList {
+    type: constants.DELETE_LIST;
+    value: DeleteListData;
+}
+
+export interface ListDeletedSuccessfuly {
+    type: constants.DELETE_LIST_SUCCESSFUL;
+}
+
 export type UploadListAction = 
     | InitLastDateFetch
     | SuccessfulLastListDateFetched
@@ -46,7 +63,11 @@ export type UploadListAction =
     | SuccessfulListsFectched
     | SuccessfulDatesFetched
     | InitListUpload
-    | SuccessfulListUpload;
+    | SuccessfulListUpload
+    | StartEditing
+    | StopEditing
+    | DeleteList
+    | ListDeletedSuccessfuly;
 
 export function FetchLastDates (): UploadListAction {
     return {
@@ -100,5 +121,28 @@ export function UpdateSelectedDate(value: DateOfList) : UploadListAction {
     return {
         type: constants.UPDATE_SELECTED_DATE,
         value,
+    }
+}
+
+export function StartEditing() : UploadListAction {
+    return {
+        type: constants.START_EDITING
+    }
+}
+
+export function StopEditing() : UploadListAction {
+    return {
+        type: constants.STOP_EDITING
+    }
+}
+
+export function DeleteList(value: DeleteListData) : UploadListAction {
+    return {
+        type: constants.DELETE_LIST,
+        value
+    }
+}export function ListDeletedSuccessfuly() : UploadListAction {
+    return {
+        type: constants.DELETE_LIST_SUCCESSFUL
     }
 }

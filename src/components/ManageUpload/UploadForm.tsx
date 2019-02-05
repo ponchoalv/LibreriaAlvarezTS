@@ -47,7 +47,7 @@ function UploadForm(props: Props) {
                 <Input type="hidden" name="nombre-hoja" value="precios" />
                 <Input type="text" name="fecha" value={props.fecha} readOnly />
                 <br />
-                <Button color="primary">Cargar Planilla</Button>
+                <Button color="primary">Subir Planilla</Button>
             </Form>
         </div>
     )

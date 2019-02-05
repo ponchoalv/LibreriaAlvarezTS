@@ -1,4 +1,4 @@
-import { PriceRow, LoadedList, DateOfList, LoadList } from "src/types";
+import { PriceRow, LoadedList, DateOfList, LoadList, DeleteListData } from "src/types";
 
 async function ApiTemplate<T>(url: string): Promise<T> {
     const response = await fetch(url);
@@ -33,6 +33,20 @@ export async function cargarLista(form: FormData): Promise<LoadList> {
         method: 'POST',
         body: form
     });
+
+    if(!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return await response.json();
+}
+
+export async function eliminarLista(lista: DeleteListData): Promise<number> {
+    const response =  await fetch('api/delete-list-by-date-and-name', {
+        method: 'POST',
+        body: JSON.stringify(lista),
+        headers: { 'Content-type': 'application/json' }
+        });
 
     if(!response.ok) {
         throw new Error(response.statusText);

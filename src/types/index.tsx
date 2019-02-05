@@ -49,8 +49,14 @@ export interface ManageUploadState {
     readonly loading: boolean;
     readonly error: Error | undefined;
     readonly listsDateOptions: Array<DateOfList>;
+    addingNewDate: boolean;
 }
 
 export interface LoadList {
     readonly success: boolean;
+}
+
+export interface DeleteListData {
+    readonly lista: string;
+    readonly fecha: string;
 }

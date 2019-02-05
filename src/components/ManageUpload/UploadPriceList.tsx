@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DateOfList, LoadedList } from 'src/types';
+import { DateOfList, LoadedList, DeleteListData } from 'src/types';
 import { Table } from "reactstrap";
 import TableRow from './TableRow';
 import UploadForm from './UploadForm';
@@ -11,6 +11,7 @@ interface StateProps {
 
 interface DispatchProps {
     uploadForm: (form: FormData) => void;
+    deleteList: (list: DeleteListData) => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -25,10 +26,11 @@ function UploadPrices(props: Props) {
                         <th>Lista</th>
                         <th>Fecha</th>
                         <th># Registros</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {props.filteredlistOptions.map((row, index) => <TableRow row={row} key={index} />)}
+                    {props.filteredlistOptions.map((row, index) => <TableRow row={row} key={index} deleteList={props.deleteList} />)}
                 </tbody>
             </Table>
             <br />

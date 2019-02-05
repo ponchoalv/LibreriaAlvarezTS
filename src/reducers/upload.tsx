@@ -1,16 +1,17 @@
-import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates, cargarLista } from "../api";
-import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, UploadListAction, SuccessfulLoadedList } from "src/actions/uploadActions";
-import { ManageUploadState } from '../types/index';
+import { fetchLastListDate, fetchAllLists, fetchAllLoadedDates, cargarLista, eliminarLista } from "../api";
+import { LoadFetchedLastListDate, FaildOnFetch, LoadFetchedLists, LoadFetchedDates, UploadListAction, SuccessfulLoadedList, ListDeletedSuccessfuly } from "src/actions/uploadActions";
+import { ManageUploadState, DeleteListData } from '../types/index';
 import { LoopReducer, Cmd, loop, Loop, RunCmd } from 'redux-loop';
 import * as constants from '../constants/manageLists';
 
 const initialState: ManageUploadState = {
     allLoadedLists: [],
     filteredLists: [],
-    selectedDate: { fecha: ""},
+    selectedDate: { fecha: "" },
     listsDateOptions: [],
     error: undefined,
-    loading: true
+    loading: true,
+    addingNewDate: false,
 }
 
 const loadLastListDate: () => RunCmd<UploadListAction> =
@@ -26,10 +27,17 @@ const loadAllListNames: () => RunCmd<UploadListAction> =
     });
 
 const loadAllDatesOptions: () => RunCmd<UploadListAction> =
-    () => Cmd.run(fetchAllLoadedDates,{
+    () => Cmd.run(fetchAllLoadedDates, {
         successActionCreator: LoadFetchedDates,
         failActionCreator: FaildOnFetch
     });
+
+const deleteList: (list: DeleteListData) => RunCmd<UploadListAction> =
+    (list: DeleteListData) => Cmd.run(eliminarLista, {
+        successActionCreator: ListDeletedSuccessfuly,
+        failActionCreator: FaildOnFetch,
+        args: [list]
+    })
 
 export const upload: LoopReducer<ManageUploadState, UploadListAction> =
     (state: ManageUploadState = initialState, action: UploadListAction): ManageUploadState | Loop<ManageUploadState, UploadListAction> => {
@@ -83,7 +91,31 @@ export const upload: LoopReducer<ManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     loading: false,
-                }, loadAllListNames())
+                }, Cmd.list([loadAllListNames(), loadAllDatesOptions()], {
+                    sequence: true
+                }))
+            case constants.START_EDITING:
+                return {
+                    ...state,
+                    addingNewDate: true,
+                }
+            case constants.STOP_EDITING:
+                return {
+                    ...state,
+                    addingNewDate: false,
+                }
+            case constants.DELETE_LIST:
+                return loop({
+                    ...state,
+                    loading: true
+                }, deleteList(action.value))
+            case constants.DELETE_LIST_SUCCESSFUL:
+                return loop({
+                    ...state,
+                    loading: false
+                }, Cmd.list([loadLastListDate(), loadAllListNames(), loadAllDatesOptions()], {
+                    sequence: true
+                }))
         }
         return state;
     }
