@@ -26,7 +26,8 @@ import {
 const initialState: IPricesState = {
     allListOptions: [],
     datesLoaded: [], 
-    error: undefined,
+    error: null,
+    loaded: false,
     loading: false,
     prices: [],
     searchText: "",
@@ -71,14 +72,19 @@ export const prices: LoopReducer<IPricesState, PriceFetchAction> =
         switch (action.type) {
             case constants.INIT_FECTCH:
                 return loop(
-                    { ...state, loading: true },
+                    { ...state, 
+                        error: null, 
+                        loading: true },
                     loadLastListDate());
             case constants.SUCCESSFUL_PRICE_LIST_FETCH:
                 return {
                     ...state,
+                    loaded: true,
                     loading: false,
                     prices: action.data,
                 };
+            case constants.CLEAR_LOADED_STATE:
+                return initialState;
             case constants.SUCCESSFUL_LIST_NAME_FETCH:
                 return {
                     ...state,

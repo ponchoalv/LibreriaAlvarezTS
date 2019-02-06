@@ -11,6 +11,7 @@ import SelectList from './TableComponents/SelectList';
 
 interface IStateProps {
     prices: IPriceRow[];
+    loaded: boolean;
     loading: boolean;
     error: Error;
     searchText: string;
@@ -35,7 +36,9 @@ class ListPrices extends React.Component<IProps, {}> {
     }
 
     public componentDidMount() {
-        this.props.init();
+        if (!this.props.loaded) {
+            this.props.init();
+        }
     }
 
     public render() {

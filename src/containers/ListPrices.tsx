@@ -9,6 +9,7 @@ export function mapStateToProps({ prices }: IStoreState) {
     return {
         datesLoaded: prices.datesLoaded,
         error: prices.error,
+        loaded: prices.loaded,
         loading: prices.loading,
         prices: prices.prices,
         searchText: prices.searchText,
@@ -24,7 +25,6 @@ export function mapDispatchToProps(dispatch: Dispatch<PriceFetchAction>) {
         selectedDateChanged: (value: IDateOfList) => dispatch(actions.UpdateSelectedDate(value)),
         selectedListChanged: (value: string) => dispatch(actions.UpdateSelectedList(value)),
         updateSearchText: (value: string) => dispatch(actions.OnSearchTextUpdate(value)),
-
     }
 }
 

@@ -46,8 +46,13 @@ export interface ISuccessfulLastListDateFetched {
     data: string;
 }
 
+export interface IClearLoadedState {
+    type: constants.CLEAR_LOADED_STATE;
+}
+
 export type PriceFetchAction = 
     | InitPriceFetch 
+    | IClearLoadedState
     | ISuccessfulPriceFetched 
     | IFailOnFetch 
     | IUpdateSearchText 

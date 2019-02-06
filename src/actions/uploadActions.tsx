@@ -1,4 +1,7 @@
+import { CLEAR_LOADED_STATE } from "src/constants/listPrices";
 import * as constants from 'src/constants/manageLists';
+
+
 import {
     IDateOfList,
     IDeleteListData,
@@ -63,8 +66,13 @@ export interface IClearEditingDate {
     type: constants.CLEAR_EDITING_DATE;
 }
 
+export interface IClearLoadedState {
+    type: CLEAR_LOADED_STATE;
+}
+
 export type UploadListAction = 
     | InitLastDateFetch
+    | IClearLoadedState
     | ISuccessfulLastListDateFetched
     | IFailOnFetch
     | IUpdateSelectedDate
@@ -162,5 +170,11 @@ export function ListDeletedSuccessfuly() : UploadListAction {
 export function ClearEditingDate() : UploadListAction {
     return {
         type: constants.CLEAR_EDITING_DATE,
+    }
+}
+
+export function ClearLoadedState() : UploadListAction {
+    return {
+        type: CLEAR_LOADED_STATE,
     }
 }

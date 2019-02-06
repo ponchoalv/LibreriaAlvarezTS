@@ -6,12 +6,15 @@ import {
     RunCmd
     } from 'redux-loop';
 import {
+    ClearLoadedState,
     FaildOnFetch,
     ListDeletedSuccessfuly,
     LoadFetchedDates,
     LoadFetchedLastListDate,
     LoadFetchedLists,
+    StopEditing,
     SuccessfulLoadedList,
+    UpdateSelectedDate,
     UploadListAction
     } from 'src/actions/uploadActions';
 import {
@@ -27,7 +30,7 @@ import { IDeleteListData, IManageUploadState } from '../types/index';
 const initialState: IManageUploadState = {
     addingNewDate: false,
     allLoadedLists: [],
-    error: undefined,
+    error: null,
     filteredLists: [],
     listsDateOptions: [],
     loading: true,
@@ -57,7 +60,14 @@ const deleteList: (list: IDeleteListData) => RunCmd<UploadListAction> =
         args: [list],
         failActionCreator: FaildOnFetch,
         successActionCreator: ListDeletedSuccessfuly,
-    })
+    });
+
+const initUpload: (data: FormData) => RunCmd<UploadListAction> =
+    (data: FormData) => Cmd.run(cargarLista, {
+        args: [data],
+        failActionCreator: FaildOnFetch,
+        successActionCreator: SuccessfulLoadedList,
+    });
 
 export const upload: LoopReducer<IManageUploadState, UploadListAction> =
     (state: IManageUploadState = initialState, action: UploadListAction): IManageUploadState | Loop<IManageUploadState, UploadListAction> => {
@@ -66,11 +76,12 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                 return loop(
                     {
                         ...state,
-                        loading: true,
+                        error: null ,
+                        loading: true
                     }, Cmd.list([loadLastListDate(), loadAllListNames(), loadAllDatesOptions()], {
                         batch: true
                     })
-                )
+                );
             case constants.SUCCESSFUL_LIST_NAME_FETCH:
                 return {
                     ...state,
@@ -88,7 +99,7 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     selectedDate: { fecha: action.data },
-                }, Cmd.none);
+                }, Cmd.action(UpdateSelectedDate({fecha: action.data})));
             case constants.FAILED_FETCH:
                 return { ...state, error: action.error, loading: false };
             case constants.UPDATE_SELECTED_DATE:
@@ -102,18 +113,14 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     loading: true,
-                }, Cmd.run(cargarLista, {
-                    args: [action.data],
-                    failActionCreator: FaildOnFetch,
-                    successActionCreator: SuccessfulLoadedList,
-                }))
+                }, initUpload(action.data));
             case constants.LIST_UPLOAD_SUCCESSFUL:
                 return loop({
                     ...state,
                     loading: false,
-                }, Cmd.list([loadAllListNames(), loadAllDatesOptions()], {
+                }, Cmd.list([loadAllListNames(), loadAllDatesOptions(), Cmd.action(ClearLoadedState()), Cmd.action(StopEditing())], {
                     batch: true
-                }))
+                }));
             case constants.START_EDITING:
                 return {
                     ...state,
@@ -138,7 +145,7 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     loading: false
-                }, Cmd.list([loadAllListNames(), loadAllDatesOptions()], {
+                }, Cmd.list([loadAllListNames(), loadAllDatesOptions(), Cmd.action(ClearLoadedState())], {
                     batch: true
                 }))
         }

@@ -24,7 +24,6 @@ interface IDispatchProps {
     selectedDateChanged: (value: IDateOfList) => void;
     uploadForm: (form: FormData) => void;
     startEditing: () => void;
-    stopEditing: () => void;
     deleteList: (list: IDeleteListData) => void;
     clearEditingDate: () => void;
 }
@@ -85,7 +84,6 @@ class ManageUpload extends React.Component<IProps, {}> {
     }
 
     private uploadForm = (form: FormData) => {
-        this.props.stopEditing();
         this.props.uploadForm(form);
     }
 

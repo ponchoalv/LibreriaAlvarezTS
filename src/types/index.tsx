@@ -18,7 +18,8 @@ export interface ILoadedList {
 export interface IPricesState {
     readonly prices: IPriceRow[];
     readonly loading: boolean;
-    readonly error: Error | undefined;
+    readonly loaded: boolean;
+    readonly error: Error | null;
     readonly searchText: string;
     readonly selectedList: string;
     readonly selectOptions: string[];
@@ -42,7 +43,7 @@ export interface IManageUploadState {
     readonly filteredLists: ILoadedList[];
     readonly selectedDate: IDateOfList;
     readonly loading: boolean;
-    readonly error: Error | undefined;
+    readonly error: Error | null;
     readonly listsDateOptions: IDateOfList[];
     addingNewDate: boolean;
 }

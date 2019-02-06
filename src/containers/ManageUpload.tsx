@@ -22,7 +22,6 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.UploadListAction>)
         init: () => dispatch(actions.FetchLastDates()),
         selectedDateChanged: (value: IDateOfList) => dispatch(actions.UpdateSelectedDate(value)),
         startEditing: () => dispatch(actions.StartEditing()),
-        stopEditing: () => dispatch(actions.StopEditing()),
         uploadForm: (form: FormData) => dispatch(actions.UploadList(form)),
     }
 }

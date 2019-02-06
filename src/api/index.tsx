@@ -34,6 +34,10 @@ export function fetchAllLoadedDates(): Promise<IDateOfList[]> {
     return ApiTemplate<IDateOfList[]>('api/get-all-dates');
 }
 
+export function fetchAllListType(): Promise<string[]> {
+    return ApiTemplate<string[]>('api/get-list-types');
+}
+
 export async function cargarLista(form: FormData): Promise<ILoadList> {
     const response =  await fetch('api/cargar-lista', {
         body: form,

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Users\\ponch\\projects\\LibreriaAlvarezTS"
+		},
+		{
+			"path": "C:\\Users\\ponch\\projects\\LibreriaAlvarezAPI"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "LibreriaAlvarezTS\\node_modules\\typescript\\lib"
+	}
+}
