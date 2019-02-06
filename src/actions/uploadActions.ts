@@ -7,7 +7,7 @@ import {
     IDeleteListData,
     ILoadedList,
     ILoadList
-    } from 'src/types';
+    } from 'src/types/index';
 
 export interface InitLastDateFetch {
     type: constants.INIT_LAST_DATE_FETCH;
