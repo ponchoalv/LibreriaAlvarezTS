@@ -26,6 +26,7 @@ interface IDispatchProps {
     startEditing: () => void;
     stopEditing: () => void;
     deleteList: (list: IDeleteListData) => void;
+    clearEditingDate: () => void;
 }
 
 export type IProps = IStateProps & IDispatchProps;
@@ -50,8 +51,8 @@ class ManageUpload extends React.Component<IProps, {}> {
                             <Row>                               
                                 <Col sm={{ size: 4 }}>
                                     <ButtonGroup>
-                                        <DatePicker onChange={this.dateChange} clearIcon={null} />
-                                        <Button color="danger" aria-label="Restablecer" onClick={this.props.stopEditing}><span>X</span></Button>
+                                        <DatePicker onChange={this.dateChange} clearIcon={null} value={this.getDate()} locale="es-419" />
+                                        <Button color="danger" aria-label="Restablecer" onClick={this.props.clearEditingDate}><span>X</span></Button>
                                     </ButtonGroup>
                                 </Col>
                             </Row>
@@ -86,6 +87,12 @@ class ManageUpload extends React.Component<IProps, {}> {
     private uploadForm = (form: FormData) => {
         this.props.stopEditing();
         this.props.uploadForm(form);
+    }
+
+    private getDate: () => Date = () => {
+        const parts = this.props.selectedDate.fecha.split('-');
+        const date = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+        return date;
     }
 }
 

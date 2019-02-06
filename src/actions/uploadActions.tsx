@@ -59,6 +59,10 @@ export interface IListDeletedSuccessfuly {
     type: constants.DELETE_LIST_SUCCESSFUL;
 }
 
+export interface IClearEditingDate {
+    type: constants.CLEAR_EDITING_DATE;
+}
+
 export type UploadListAction = 
     | InitLastDateFetch
     | ISuccessfulLastListDateFetched
@@ -71,7 +75,8 @@ export type UploadListAction =
     | IStartEditing
     | IStopEditing
     | IDeleteList
-    | IListDeletedSuccessfuly;
+    | IListDeletedSuccessfuly
+    | IClearEditingDate;
 
 export function FetchLastDates (): UploadListAction {
     return {
@@ -146,8 +151,16 @@ export function DeleteList(value: IDeleteListData) : UploadListAction {
         type: constants.DELETE_LIST,
         value
     }
-}export function ListDeletedSuccessfuly() : UploadListAction {
+}
+
+export function ListDeletedSuccessfuly() : UploadListAction {
     return {
-        type: constants.DELETE_LIST_SUCCESSFUL
+        type: constants.DELETE_LIST_SUCCESSFUL,
+    }
+}
+
+export function ClearEditingDate() : UploadListAction {
+    return {
+        type: constants.CLEAR_EDITING_DATE,
     }
 }

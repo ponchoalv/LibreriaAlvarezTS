@@ -24,11 +24,11 @@
     }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-color: rgb(53, 55, 82);
 }
 
     .sidebar .top-row {
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgb(56, 54, 56);
     }
 
     .sidebar .navbar-brand {
@@ -142,10 +142,11 @@
 
 .home-logo {
     animation-name: home-logo;
-    animation-duration: 4s;
-    animation-iteration-count: 1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
     animation-timing-function: easy-in-out;
-    background-color: rgb(247, 247, 247);
+    margin-right: 5px;
+    margin-bottom: 4px;
 }
 
 @keyframes home-logo {

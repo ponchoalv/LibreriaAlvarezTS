@@ -120,10 +120,15 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                     addingNewDate: true,
                 }
             case constants.STOP_EDITING:
-                return {
+                return loop({
                     ...state,
                     addingNewDate: false,
-                }
+                }, Cmd.none)
+            case constants.CLEAR_EDITING_DATE:
+                return loop({
+                    ...state,
+                    addingNewDate: false,
+                }, loadLastListDate())
             case constants.DELETE_LIST:
                 return loop({
                     ...state,

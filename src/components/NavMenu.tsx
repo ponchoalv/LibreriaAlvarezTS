@@ -9,6 +9,7 @@ import {
     NavItem,
     NavLink
     } from 'reactstrap';
+import logo from "src/assets/logo-small.png";
 
 interface IState {
     isOpen: boolean;
@@ -26,7 +27,7 @@ export default class NavMenu extends React.Component<{}, IState> {
         return (
             <div className="sidebar">
                 <Navbar className="top-row pl-4" dark={true}>
-                    <NavbarBrand href="/">Librería Álvarez</NavbarBrand>
+                    <NavbarBrand href="/"><img className="home-logo" width="30" height="30" src={logo}  alt="Librería Alvarez" />Librería Álvarez</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                 </Navbar>
                 <Collapse isOpen={this.state.isOpen} navbar={true}>

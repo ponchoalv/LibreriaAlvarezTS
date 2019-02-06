@@ -17,6 +17,7 @@ export function mapStateToProps({ upload } : IStoreState) {
     
 export function mapDispatchToProps(dispatch: Dispatch<actions.UploadListAction>) {
     return {
+        clearEditingDate: () => dispatch(actions.ClearEditingDate()),
         deleteList: (list: IDeleteListData) => dispatch(actions.DeleteList(list)),
         init: () => dispatch(actions.FetchLastDates()),
         selectedDateChanged: (value: IDateOfList) => dispatch(actions.UpdateSelectedDate(value)),
