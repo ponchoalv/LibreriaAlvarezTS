@@ -39,13 +39,15 @@ export interface IDateOfList {
 }
 
 export interface IManageUploadState {
+    readonly addingNewDate: boolean;
     readonly allLoadedLists: ILoadedList[];
-    readonly filteredLists: ILoadedList[];
-    readonly selectedDate: IDateOfList;
-    readonly loading: boolean;
     readonly error: Error | null;
+    readonly filteredLists: ILoadedList[];
+    readonly loading: boolean;
+    readonly listTypeOptions: string[];
     readonly listsDateOptions: IDateOfList[];
-    addingNewDate: boolean;
+    readonly selectedDate: IDateOfList;
+    readonly nuevaPlanilla: boolean;
 }
 
 export interface ILoadList {

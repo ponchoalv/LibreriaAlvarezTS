@@ -9,11 +9,13 @@ import {
     ClearLoadedState,
     FaildOnFetch,
     ListDeletedSuccessfuly,
+    ListTypeFetched,
     LoadFetchedDates,
     LoadFetchedLastListDate,
     LoadFetchedLists,
     StopEditing,
     SuccessfulLoadedList,
+    ToggleNuevaPlanilla,
     UpdateSelectedDate,
     UploadListAction
     } from 'src/actions/uploadActions';
@@ -21,6 +23,7 @@ import {
     cargarLista,
     eliminarLista,
     fetchAllLists,
+    fetchAllListType,
     fetchAllLoadedDates,
     fetchLastListDate
     } from '../api';
@@ -32,8 +35,10 @@ const initialState: IManageUploadState = {
     allLoadedLists: [],
     error: null,
     filteredLists: [],
+    listTypeOptions: [],
     listsDateOptions: [],
     loading: true,
+    nuevaPlanilla: false,
     selectedDate: { fecha: "" },
 }
 
@@ -69,6 +74,13 @@ const initUpload: (data: FormData) => RunCmd<UploadListAction> =
         successActionCreator: SuccessfulLoadedList,
     });
 
+const fecthListTypes: () => RunCmd<UploadListAction> =
+    () => Cmd.run(fetchAllListType, {
+        failActionCreator: FaildOnFetch,
+        successActionCreator: ListTypeFetched,
+    });
+
+
 export const upload: LoopReducer<IManageUploadState, UploadListAction> =
     (state: IManageUploadState = initialState, action: UploadListAction): IManageUploadState | Loop<IManageUploadState, UploadListAction> => {
         switch (action.type) {
@@ -78,8 +90,14 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                         ...state,
                         error: null ,
                         loading: true
-                    }, Cmd.list([loadLastListDate(), loadAllListNames(), loadAllDatesOptions()], {
-                        batch: true
+                    }, Cmd.list(
+                        [
+                            loadLastListDate(), 
+                            loadAllListNames(), 
+                            loadAllDatesOptions(), 
+                            fecthListTypes()
+                        ], {
+                            batch: true
                     })
                 );
             case constants.SUCCESSFUL_LIST_NAME_FETCH:
@@ -118,8 +136,15 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     loading: false,
-                }, Cmd.list([loadAllListNames(), loadAllDatesOptions(), Cmd.action(ClearLoadedState()), Cmd.action(StopEditing())], {
-                    batch: true
+                }, Cmd.list(
+                    [
+                        loadAllListNames(), 
+                        loadAllDatesOptions(), 
+                        Cmd.action(ClearLoadedState()), 
+                        Cmd.action(StopEditing()), 
+                        Cmd.action(ToggleNuevaPlanilla())
+                    ], {
+                        batch: true
                 }));
             case constants.START_EDITING:
                 return {
@@ -145,9 +170,24 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                 return loop({
                     ...state,
                     loading: false
-                }, Cmd.list([loadAllListNames(), loadAllDatesOptions(), Cmd.action(ClearLoadedState())], {
-                    batch: true
-                }))
+                }, Cmd.list(
+                    [
+                        loadAllListNames(), 
+                        loadAllDatesOptions(), 
+                        Cmd.action(ClearLoadedState())
+                    ], {
+                        batch: true
+                    }));
+            case constants.LIST_TYPE_FETCHED:
+                return {
+                    ...state,
+                    listTypeOptions: action.data,
+                }
+            case constants.TOGGLE_NUEVA_PLANILLA:
+                return {
+                    ...state,
+                    nuevaPlanilla: !state.nuevaPlanilla
+                }
         }
         return state;
     }

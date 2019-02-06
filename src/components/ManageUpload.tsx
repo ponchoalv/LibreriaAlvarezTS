@@ -17,6 +17,8 @@ interface IStateProps {
     filteredlistOptions: ILoadedList[];
     listsDateOptions: IDateOfList[];
     addingNewDate: boolean;
+    listTypeOptions: string[];
+    nuevaPlanilla: boolean;
 }
 
 interface IDispatchProps {
@@ -26,6 +28,7 @@ interface IDispatchProps {
     startEditing: () => void;
     deleteList: (list: IDeleteListData) => void;
     clearEditingDate: () => void;
+    toggleNuevaPlanilla: () => void;
 }
 
 export type IProps = IStateProps & IDispatchProps;
@@ -70,7 +73,14 @@ class ManageUpload extends React.Component<IProps, {}> {
                         <br />
                         <Row>
                             <Col>
-                                <UploadPrices uploadForm={this.uploadForm} selectedDate={this.props.selectedDate} filteredlistOptions={this.props.filteredlistOptions} deleteList={this.props.deleteList} />
+                                <UploadPrices 
+                                    uploadForm={this.uploadForm} 
+                                    selectedDate={this.props.selectedDate} 
+                                    filteredlistOptions={this.props.filteredlistOptions} 
+                                    deleteList={this.props.deleteList} 
+                                    listTypeOptions={this.props.listTypeOptions}
+                                    nuevaPlanilla={this.props.nuevaPlanilla} 
+                                    toggleNuevaPlanilla={this.props.toggleNuevaPlanilla}/>
                             </Col>
                         </Row>
                     </Container>

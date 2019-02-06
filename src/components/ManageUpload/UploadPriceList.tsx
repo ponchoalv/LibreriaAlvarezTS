@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
 import { IDateOfList, IDeleteListData, ILoadedList } from 'src/types';
 import TableRow from './TableRow';
 import UploadForm from './UploadForm';
@@ -7,11 +7,14 @@ import UploadForm from './UploadForm';
 interface IStateProps {
     selectedDate: IDateOfList;
     filteredlistOptions: ILoadedList[];
+    listTypeOptions: string[];
+    nuevaPlanilla: boolean;
 }
 
 interface IDispatchProps {
     uploadForm: (form: FormData) => void;
     deleteList: (list: IDeleteListData) => void;
+    toggleNuevaPlanilla: () => void;
 }
 
 type IProps = IStateProps & IDispatchProps;
@@ -19,7 +22,7 @@ type IProps = IStateProps & IDispatchProps;
 function UploadPrices(props: IProps) {
     return (
         <div>
-            <h3>Planillas cargadas:</h3> 
+            <h3>Planillas cargadas:</h3>
             <Table responsive={true}>
                 <thead className="thead-dark">
                     <tr>
@@ -34,8 +37,14 @@ function UploadPrices(props: IProps) {
                 </tbody>
             </Table>
             <br />
-            <UploadForm uploadForm={props.uploadForm} fecha={props.selectedDate.fecha} />
+            {props.nuevaPlanilla ?
+                (
+                    <UploadForm uploadForm={props.uploadForm} fecha={props.selectedDate.fecha} listTypeOptions={props.listTypeOptions} toggleNuevaPlanilla={props.toggleNuevaPlanilla} />
+                ) : (
+                    <Button color="success" onClick={props.toggleNuevaPlanilla}>Cargar nueva planilla</Button>
+                )}
         </div>
     )
 }
+
 export default UploadPrices;

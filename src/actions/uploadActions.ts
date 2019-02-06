@@ -70,6 +70,15 @@ export interface IClearLoadedState {
     type: CLEAR_LOADED_STATE;
 }
 
+export interface IListTypeFetched {
+    data: string[];
+    type: constants.LIST_TYPE_FETCHED;
+}
+
+export interface IToggleNuevaPlanilla {
+    type: constants.TOGGLE_NUEVA_PLANILLA;
+}
+
 export type UploadListAction = 
     | InitLastDateFetch
     | IClearLoadedState
@@ -84,7 +93,9 @@ export type UploadListAction =
     | IStopEditing
     | IDeleteList
     | IListDeletedSuccessfuly
-    | IClearEditingDate;
+    | IClearEditingDate
+    | IListTypeFetched
+    | IToggleNuevaPlanilla;
 
 export function FetchLastDates (): UploadListAction {
     return {
@@ -176,5 +187,18 @@ export function ClearEditingDate() : UploadListAction {
 export function ClearLoadedState() : UploadListAction {
     return {
         type: CLEAR_LOADED_STATE,
+    }
+}
+
+export function ListTypeFetched(data: string[]) : UploadListAction {
+    return {
+        data,
+        type: constants.LIST_TYPE_FETCHED,
+    }
+}
+
+export function ToggleNuevaPlanilla() : UploadListAction {
+    return {
+        type: constants.TOGGLE_NUEVA_PLANILLA,
     }
 }

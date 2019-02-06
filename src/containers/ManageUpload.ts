@@ -9,8 +9,10 @@ export function mapStateToProps({ upload } : IStoreState) {
         addingNewDate: upload.addingNewDate,
         error: upload.error,
         filteredlistOptions: upload.filteredLists,
+        listTypeOptions: upload.listTypeOptions,
         listsDateOptions: upload.listsDateOptions,
         loading: upload.loading,
+        nuevaPlanilla: upload.nuevaPlanilla,
         selectedDate: upload.selectedDate,
     }
 }
@@ -22,6 +24,7 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.UploadListAction>)
         init: () => dispatch(actions.FetchLastDates()),
         selectedDateChanged: (value: IDateOfList) => dispatch(actions.UpdateSelectedDate(value)),
         startEditing: () => dispatch(actions.StartEditing()),
+        toggleNuevaPlanilla: () => dispatch(actions.ToggleNuevaPlanilla()),
         uploadForm: (form: FormData) => dispatch(actions.UploadList(form)),
     }
 }
