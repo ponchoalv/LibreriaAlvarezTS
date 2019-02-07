@@ -33,17 +33,17 @@ export default class NavMenu extends React.Component<{}, IState> {
                 <Collapse isOpen={this.state.isOpen} navbar={true}>
                     <Nav vertical={true}>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} exact={true} to="/" activeClassName="active">
+                            <NavLink tag={RRNavLink} exact={true} to="/secured" activeClassName="active">
                                 <span className="oi oi-home" aria-hidden="true" />Home
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} to="/list" activeClassName="active">
+                            <NavLink tag={RRNavLink} to="/secured/list" activeClassName="active">
                                 <span className="oi oi-list-rich" aria-hidden="true" />Lista de Precios
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} to="/upload" activeClassName="active">
+                            <NavLink tag={RRNavLink} to="/secured/upload" activeClassName="active">
                                 <span className="oi oi-cloud-upload" aria-hidden="true" />Cargar Listas
                             </NavLink>
                         </NavItem>
