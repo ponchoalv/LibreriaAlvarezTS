@@ -1,4 +1,5 @@
 import { RouterState } from 'connected-react-router';
+import { match } from 'react-router';
 
 // objeto que responde GET /api/prices-by-fecha?fecha=2019-01-18
 export interface IPriceRow {
@@ -57,4 +58,8 @@ export interface ILoadList {
 export interface IDeleteListData {
     readonly lista: string;
     readonly fecha: string;
+}
+
+export interface IRoutesProps {
+    match: match<any>;
 }

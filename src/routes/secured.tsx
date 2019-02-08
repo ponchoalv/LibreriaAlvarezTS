@@ -5,8 +5,9 @@ import NavMenu from 'src/components/NavMenu';
 import NoMatch from 'src/components/NoMatch';
 import ListPrices from 'src/containers/ListPrices';
 import ManageUpload from 'src/containers/ManageUpload';
+import { IRoutesProps } from 'src/types';
 
-const Secured = () =>  <div className="app">
+const Secured = ({ match }: IRoutesProps) =>  <div className="app">
     <NavMenu />
     <div className="main">
         <div className="top-row px-4">
@@ -14,9 +15,9 @@ const Secured = () =>  <div className="app">
         </div>
         <div className="content px-4">
             <Switch>
-                <Route exact={true} path="/secured" component={Home} />
-                <Route exact={true} path="/secured/list" component={ListPrices} />
-                <Route exact={true} path="/secured/upload" component={ManageUpload} />
+                <Route exact={true} path={`${match.url}`} component={Home} />
+                <Route exact={true} path={`${match.url}/list`} component={ListPrices} />
+                <Route exact={true} path={`${match.url}/upload`} component={ManageUpload} />
                 <Route component={NoMatch} />
             </Switch>
         </div>
