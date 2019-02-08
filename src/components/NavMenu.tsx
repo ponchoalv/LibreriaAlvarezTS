@@ -10,12 +10,13 @@ import {
     NavLink
     } from 'reactstrap';
 import logo from "src/assets/logo-small.png";
+import { IRoutesProps } from 'src/types';
 
 interface IState {
     isOpen: boolean;
 }
 
-export default class NavMenu extends React.Component<{}, IState> {
+export default class NavMenu extends React.Component<IRoutesProps, IState> {
     constructor(props: any) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -33,17 +34,17 @@ export default class NavMenu extends React.Component<{}, IState> {
                 <Collapse isOpen={this.state.isOpen} navbar={true}>
                     <Nav vertical={true}>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} exact={true} to="/secured" activeClassName="active">
+                            <NavLink tag={RRNavLink} exact={true} to={`${this.props.match.url}`} activeClassName="active">
                                 <span className="oi oi-home" aria-hidden="true" />Home
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} to="/secured/list" activeClassName="active">
+                            <NavLink tag={RRNavLink} to={`${this.props.match.url}/list`} activeClassName="active">
                                 <span className="oi oi-list-rich" aria-hidden="true" />Lista de Precios
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} to="/secured/upload" activeClassName="active">
+                            <NavLink tag={RRNavLink} to={`${this.props.match.url}/upload`} activeClassName="active">
                                 <span className="oi oi-cloud-upload" aria-hidden="true" />Cargar Listas
                             </NavLink>
                         </NavItem>

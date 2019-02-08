@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
+import { Link } from 'react-router-dom';
 import Home from 'src/components/Home';
 import NavMenu from 'src/components/NavMenu';
 import NoMatch from 'src/components/NoMatch';
@@ -8,10 +9,10 @@ import ManageUpload from 'src/containers/ManageUpload';
 import { IRoutesProps } from 'src/types';
 
 const Secured = ({ match }: IRoutesProps) =>  <div className="app">
-    <NavMenu />
+    <NavMenu match={match} />
     <div className="main">
         <div className="top-row px-4">
-            <a href="https://libreria-alvarez.net" target="_blank" className="ml-md-auto">Acerca</a>
+            <Link to="/" className="ml-md-auto">logout</Link>
         </div>
         <div className="content px-4">
             <Switch>
