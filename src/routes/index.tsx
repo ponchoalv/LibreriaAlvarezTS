@@ -13,13 +13,13 @@ const Secured = (props: IRoutesProps) =>
 
 const Login = () => 
 <div>
-    <Link to="/secured">Login</Link>
+    <Link to="/users">Login</Link>
 </div>   
 
 const routes = (
     <Switch>
         <Route exact={true} path="/" component={Login} />
-        <Route path="/secured" render={Secured} />
+        <Route path="/users" render={Secured} />
         <Route component={NoMatch} />
     </Switch >
 )
