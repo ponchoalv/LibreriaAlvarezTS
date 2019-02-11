@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Container, Table } from 'reactstrap';
-import { IPriceRow } from 'src/types';
+import { IPriceRow } from '../../types';
 import LazyDownloadButton from './LazyDownloadButton';
 import TableRow from './TableRow';
 

@@ -1,8 +1,8 @@
 import { connectRouter } from 'connected-react-router';
 import { History } from 'history';
 import { combineReducers, LoopReducer } from 'redux-loop';
-import { PriceFetchAction, UploadListAction } from 'src/actions';
-import { IManageUploadState, IPricesState, IStoreState } from 'src/types';
+import { PriceFetchAction, UploadListAction } from '../actions';
+import { IManageUploadState, IPricesState, IStoreState } from '../types';
 import { prices } from './prices';
 import { upload } from './upload';
 

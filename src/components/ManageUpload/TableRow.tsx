@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from 'reactstrap';
-import { IDeleteListData, ILoadedList } from 'src/types';
+import { IDeleteListData, ILoadedList } from '../../types';
 
 interface IStateProps {
     row: ILoadedList;

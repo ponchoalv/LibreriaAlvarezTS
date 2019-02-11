@@ -5,14 +5,14 @@ import ButtonGroup from 'reactstrap/lib/ButtonGroup';
 import Col from 'reactstrap/lib/Col';
 import Container from 'reactstrap/lib/Container';
 import Row from 'reactstrap/lib/Row';
-import { IDateOfList, IDeleteListData, ILoadedList } from 'src/types';
+import { IDateOfList, IDeleteListData, ILoadedList } from '../types';
 import { ActivityAndErrorIndicator } from './commons/ActivityAndErrorIndicator';
 import UploadPrices from './ManageUpload/UploadPriceList';
 import SelectDate from './TableComponents/SelectDate';
 
 interface IStateProps {
     loading: boolean;
-    error: Error;
+    error: Error | null;
     selectedDate: IDateOfList;
     filteredlistOptions: ILoadedList[];
     listsDateOptions: IDateOfList[];
@@ -89,8 +89,8 @@ class ManageUpload extends React.Component<IProps, {}> {
         );
     }
 
-    private dateChange = (date: Date) => {
-        this.props.selectedDateChanged({ fecha: date.toISOString().split('T')[0] });
+    private dateChange: (date: Date | Date[]) => void = (date: Date | Date[]) => {
+        this.props.selectedDateChanged({ fecha: (date as Date).toISOString().split('T')[0] });
     }
 
     private uploadForm = (form: FormData) => {

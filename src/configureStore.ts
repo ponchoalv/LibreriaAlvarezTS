@@ -11,14 +11,15 @@ const enhancedCreateStore = createStore as StoreCreator;
 
 export default function configureStore(preloadedState?: any) {
   const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
   const store = enhancedCreateStore(
     createRootReducer(history),
     preloadedState,
     composeEnhancer(
+      install(), 
       applyMiddleware(
         routerMiddleware(history),
       ),
-      install(),
     ),
   )
 

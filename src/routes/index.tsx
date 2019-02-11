@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
-import NoMatch from 'src/components/NoMatch';
-import { IRoutesProps } from 'src/types';
+import NoMatch from '../components/NoMatch';
+import { IRoutesProps } from '../types';
 
 
 const SecuredRoutes = React.lazy(() => import('./secured'));

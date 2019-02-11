@@ -9,8 +9,8 @@ import {
     NavItem,
     NavLink
     } from 'reactstrap';
-import logo from "src/assets/logo-small.png";
-import { IRoutesProps } from 'src/types';
+import logo from "../assets/logo-small.png";
+import { IRoutesProps } from '../types';
 
 interface IState {
     isOpen: boolean;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import { IDateOfList } from 'src/types';
+import { IDateOfList } from '../../types';
 
 export interface IStateProps {
     selectedDate: IDateOfList;

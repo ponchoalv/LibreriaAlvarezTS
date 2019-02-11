@@ -6,7 +6,7 @@ import { Alert, Spinner } from 'reactstrap';
 interface IProps {
     children: React.ReactNode;
     loading: boolean;
-    error: Error;
+    error: Error | null;
 }
 
 export class ActivityAndErrorIndicator extends React.Component<IProps> {

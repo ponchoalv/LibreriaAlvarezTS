@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import * as actions from 'src/actions/uploadActions';
-import ManageUpload from 'src/components/ManageUpload';
-import { IDateOfList, IDeleteListData, IStoreState } from 'src/types/index';
+import * as actions from '../actions/uploadActions';
+import ManageUpload from '../components/ManageUpload';
+import { IDateOfList, IDeleteListData, IStoreState } from '../types/index';
 
 export function mapStateToProps({ upload } : IStoreState) {
     return {

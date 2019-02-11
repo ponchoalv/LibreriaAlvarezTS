@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import { IDateOfList, IPriceRow } from 'src/types';
+import { IDateOfList, IPriceRow } from '../types';
 import { ActivityAndErrorIndicator } from './commons/ActivityAndErrorIndicator';
 import LazyDownloadButton from './TableComponents/LazyDownloadButton';
 import PriceTable from './TableComponents/PriceTable';
@@ -13,7 +13,7 @@ interface IStateProps {
     prices: IPriceRow[];
     loaded: boolean;
     loading: boolean;
-    error: Error;
+    error: Error | null;
     searchText: string;
     selectedList: string;
     selectOptions: string[];

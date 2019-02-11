@@ -1,5 +1,5 @@
-import * as constants from 'src/constants/listPrices';
-import { IDateOfList, ILoadedList, IPriceRow } from 'src/types';
+import * as constants from '../constants/listPrices';
+import { IDateOfList, ILoadedList, IPriceRow } from '../types';
 
 // List of prices events
 export interface InitPriceFetch {

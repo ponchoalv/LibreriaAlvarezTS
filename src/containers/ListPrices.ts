@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { PriceFetchAction } from 'src/actions';
-import * as actions from 'src/actions/listPrices';
-import ListPrices from 'src/components/ListPrices';
-import { IDateOfList, IStoreState } from 'src/types';
+import { PriceFetchAction } from '../actions';
+import * as actions from '../actions/listPrices';
+import ListPrices from '../components/ListPrices';
+import { IDateOfList, IStoreState } from '../types';
 
 export function mapStateToProps({ prices }: IStoreState) {
     return {

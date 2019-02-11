@@ -6,16 +6,16 @@ import {
     LoopReducer,
     RunCmd
     } from 'redux-loop';
-import { PriceFetchAction } from 'src/actions';
+import { PriceFetchAction } from '../actions';
 import {
     FaildOnFetch,
     LoadFetchedDates,
     LoadFetchedLastListDate,
     LoadFetchedLists,
     LoadFetchedPrices
-    } from 'src/actions/listPrices';
-import * as constants from 'src/constants/listPrices';
-import { IPricesState } from 'src/types/index';
+    } from '../actions/listPrices';
+import * as constants from '../constants/listPrices';
+import { IPricesState } from '../types/index';
 import {
     fetchAllLists,
     fetchAllLoadedDates,

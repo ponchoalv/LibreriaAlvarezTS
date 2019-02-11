@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactExport, { ExcelBorderStyle, ExcelCellData } from 'react-data-export';
 import { Button } from 'reactstrap';
-import { IPriceRow } from 'src/types';
+import { IPriceRow } from '../../types';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;

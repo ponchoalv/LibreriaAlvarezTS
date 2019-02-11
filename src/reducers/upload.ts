@@ -18,7 +18,7 @@ import {
     ToggleNuevaPlanilla,
     UpdateSelectedDate,
     UploadListAction
-    } from 'src/actions/uploadActions';
+    } from '../actions/uploadActions';
 import {
     cargarLista,
     eliminarLista,

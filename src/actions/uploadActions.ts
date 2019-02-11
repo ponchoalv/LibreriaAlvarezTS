@@ -1,5 +1,5 @@
-import { CLEAR_LOADED_STATE } from "src/constants/listPrices";
-import * as constants from 'src/constants/manageLists';
+import { CLEAR_LOADED_STATE } from "../constants/listPrices";
+import * as constants from '../constants/manageLists';
 
 
 import {
@@ -7,7 +7,7 @@ import {
     IDeleteListData,
     ILoadedList,
     ILoadList
-    } from 'src/types/index';
+    } from '../types/index';
 
 export interface InitLastDateFetch {
     type: constants.INIT_LAST_DATE_FETCH;

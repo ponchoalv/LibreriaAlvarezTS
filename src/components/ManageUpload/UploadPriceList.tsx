@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Table } from 'reactstrap';
-import { IDateOfList, IDeleteListData, ILoadedList } from 'src/types';
+import { IDateOfList, IDeleteListData, ILoadedList } from '../../types';
 import TableRow from './TableRow';
 import UploadForm from './UploadForm';
 

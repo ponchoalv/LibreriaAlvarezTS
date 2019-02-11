@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IPriceRow } from 'src/types';
+import { IPriceRow } from '../../types';
 
 const LazyButton= React.lazy(() => import('./ExcelExportButton'))
 

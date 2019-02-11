@@ -4,7 +4,7 @@ import {
     ILoadedList,
     ILoadList,
     IPriceRow
-    } from 'src/types';
+    } from '../types';
 
 async function ApiTemplate<T>(url: string): Promise<T> {
     const response = await fetch(url);
