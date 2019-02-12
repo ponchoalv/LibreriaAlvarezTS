@@ -34,16 +34,10 @@ class ListPrices extends React.Component<IProps, {}> {
     constructor(props: IProps) {
         super(props);
     }
-
-    public componentDidMount() {
-        if (!this.props.loaded) {
-            this.props.init();
-        }
-    }
-
+    
     public render() {
         return (
-            <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error}>
+            <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error} initAction={this.props.init} loaded={this.props.loaded} >
                 <div>
                     <h1>Lista de Precios</h1>
                     <p>Buscar entre <b>{this.props.prices.length}</b> articulos de librería y juguetes.</p>

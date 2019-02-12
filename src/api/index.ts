@@ -4,15 +4,21 @@ import {
     ILoadedList,
     ILoadList,
     IPriceRow
-    } from '../types';
+} from '../types';
 
 async function ApiTemplate<T>(url: string): Promise<T> {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+        headers: {
+            'Authentication': 'adasdasfasfsafsafasds',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    });
     if (!response.ok) {
         throw new Error(response.statusText);
     }
     return await response.json();
-  }
+}
 
 export async function fetchPrices(date: string): Promise<IPriceRow[]> {
     return await ApiTemplate<IPriceRow[]>('/api/prices-by-fecha?fecha=' + date);
@@ -39,12 +45,12 @@ export function fetchAllListType(): Promise<string[]> {
 }
 
 export async function cargarLista(form: FormData): Promise<ILoadList> {
-    const response =  await fetch('/api/cargar-lista', {
+    const response = await fetch('/api/cargar-lista', {
         body: form,
         method: 'POST'
     });
 
-    if(!response.ok) {
+    if (!response.ok) {
         throw new Error(response.statusText);
     }
 
@@ -52,13 +58,13 @@ export async function cargarLista(form: FormData): Promise<ILoadList> {
 }
 
 export async function eliminarLista(lista: IDeleteListData): Promise<number> {
-    const response =  await fetch('/api/delete-list-by-date-and-name', {
+    const response = await fetch('/api/delete-list-by-date-and-name', {
         body: JSON.stringify(lista),
         headers: { 'Content-type': 'application/json' },
         method: 'POST',
     });
 
-    if(!response.ok) {
+    if (!response.ok) {
         throw new Error(response.statusText);
     }
 

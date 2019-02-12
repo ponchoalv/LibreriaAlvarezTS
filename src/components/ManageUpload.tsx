@@ -38,14 +38,9 @@ class ManageUpload extends React.Component<IProps, {}> {
         super(props);
     }
 
-    public componentDidMount() {
-        this.props.init();
-    }
-
     public render() {
         return (
-            <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error}>
-                <div>
+            <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error} initAction={this.props.init} loaded={false} >
                     <h1>Administrar la carga de listas</h1>
                     <p>Fecha selecionada: <b>{this.props.selectedDate.fecha}</b></p>
                     <Container>
@@ -74,7 +69,7 @@ class ManageUpload extends React.Component<IProps, {}> {
                         <Row>
                             <Col>
                                 <UploadPrices 
-                                    uploadForm={this.uploadForm} 
+                                    uploadForm={this.props.uploadForm} 
                                     selectedDate={this.props.selectedDate} 
                                     filteredlistOptions={this.props.filteredlistOptions} 
                                     deleteList={this.props.deleteList} 
@@ -84,17 +79,12 @@ class ManageUpload extends React.Component<IProps, {}> {
                             </Col>
                         </Row>
                     </Container>
-                </div>
             </ActivityAndErrorIndicator>
         );
     }
 
     private dateChange: (date: Date | Date[]) => void = (date: Date | Date[]) => {
         this.props.selectedDateChanged({ fecha: (date as Date).toISOString().split('T')[0] });
-    }
-
-    private uploadForm = (form: FormData) => {
-        this.props.uploadForm(form);
     }
 
     private getDate: () => Date = () => {
