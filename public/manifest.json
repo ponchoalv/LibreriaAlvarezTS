@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Librería Alvarez",
+  "name": "Aplicación para administrar listas de precios en sistema de libreria alvarez",
   "icons": [
     {
       "src": "favicon.ico",
