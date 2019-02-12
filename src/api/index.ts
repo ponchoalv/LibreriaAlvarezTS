@@ -3,7 +3,8 @@ import {
     IDeleteListData,
     ILoadedList,
     ILoadList,
-    IPriceRow
+    IPriceRow,
+    IToken
 } from '../types';
 
 async function ApiTemplate<T>(url: string): Promise<T> {
@@ -46,6 +47,20 @@ export function fetchAllListType(): Promise<string[]> {
 
 export async function cargarLista(form: FormData): Promise<ILoadList> {
     const response = await fetch('/api/cargar-lista', {
+        body: form,
+        method: 'POST'
+    });
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return await response.json();
+}
+
+
+export async function requestLogin(form: FormData): Promise<IToken> {
+    const response = await fetch('/api/login', {
         body: form,
         method: 'POST'
     });

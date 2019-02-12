@@ -63,3 +63,13 @@ export interface IDeleteListData {
 export interface IRoutesProps {
     match: match<any>;
 }
+
+export interface IToken {
+    token: string;
+}
+
+export interface ILoginState {
+    readonly error: Error | null;
+    readonly loading: boolean;
+    readonly loginToken: IToken | null;
+}
