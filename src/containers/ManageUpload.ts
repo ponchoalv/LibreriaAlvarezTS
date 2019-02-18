@@ -4,7 +4,7 @@ import * as actions from '../actions/uploadActions';
 import ManageUpload from '../components/ManageUpload';
 import { IDateOfList, IDeleteListData, IStoreState } from '../types/index';
 
-export function mapStateToProps({ upload } : IStoreState) {
+export function mapStateToProps({ upload, login } : IStoreState) {
     return {
         addingNewDate: upload.addingNewDate,
         error: upload.error,
@@ -14,6 +14,7 @@ export function mapStateToProps({ upload } : IStoreState) {
         loading: upload.loading,
         nuevaPlanilla: upload.nuevaPlanilla,
         selectedDate: upload.selectedDate,
+        token: login.loginToken,
     }
 }
     

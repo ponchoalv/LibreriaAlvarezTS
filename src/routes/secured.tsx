@@ -13,7 +13,7 @@ const Secured = ({ match }: IRoutesProps) =>
         <NavMenu match={match} />
         <div className="main">
             <div className="top-row px-4">
-                <Link to="/" className="ml-md-auto">logout</Link>
+                <Link to="/" className="ml-md-auto">libreria-alvarez</Link>
             </div>
             <div className="content px-4">
                 <Switch>

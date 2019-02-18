@@ -5,7 +5,7 @@ import * as actions from '../actions/listPrices';
 import ListPrices from '../components/ListPrices';
 import { IDateOfList, IStoreState } from '../types';
 
-export function mapStateToProps({ prices }: IStoreState) {
+export function mapStateToProps({ prices, login }: IStoreState) {
     return {
         datesLoaded: prices.datesLoaded,
         error: prices.error,
@@ -16,6 +16,7 @@ export function mapStateToProps({ prices }: IStoreState) {
         selectOptions: prices.selectOptions,
         selectedDate: prices.selectedDate,
         selectedList: prices.selectedList,
+        token: login.loginToken,
     }
 }
     

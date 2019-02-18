@@ -48,6 +48,11 @@ export default class NavMenu extends React.Component<IRoutesProps, IState> {
                                 <span className="oi oi-cloud-upload" aria-hidden="true" />Cargar Listas
                             </NavLink>
                         </NavItem>
+                        <NavItem className="px-3">
+                            <NavLink tag={RRNavLink} to={`${this.props.match.url}/upload`} activeClassName="active">
+                                <span className="oi oi-cloud-upload" aria-hidden="true" />Logout
+                            </NavLink>
+                        </NavItem>
                     </Nav>
                 </Collapse>
             </div>

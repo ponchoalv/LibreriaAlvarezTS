@@ -30,7 +30,7 @@ class Login extends React.Component<IProps, {}> {
         }
 
         return (
-            <ActivityAndErrorIndicator initAction={this.nothing} loading={this.props.loading} error={this.props.error} loaded={true} >
+            <ActivityAndErrorIndicator initAction={this.nothing} loading={this.props.loading} error={null} loaded={true} >
                 <LoginForm error={this.props.error} loading={this.props.loading} login={this.props.login} />
             </ActivityAndErrorIndicator>
             );

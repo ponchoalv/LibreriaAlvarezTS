@@ -5,10 +5,11 @@ import ButtonGroup from 'reactstrap/lib/ButtonGroup';
 import Col from 'reactstrap/lib/Col';
 import Container from 'reactstrap/lib/Container';
 import Row from 'reactstrap/lib/Row';
-import { IDateOfList, IDeleteListData, ILoadedList } from '../types';
+import { IDateOfList, IDeleteListData, ILoadedList, IToken } from '../types';
 import { ActivityAndErrorIndicator } from './commons/ActivityAndErrorIndicator';
 import UploadPrices from './ManageUpload/UploadPriceList';
 import SelectDate from './TableComponents/SelectDate';
+import { SecuredComponent } from './commons/SecuredComponent';
 
 interface IStateProps {
     loading: boolean;
@@ -19,6 +20,7 @@ interface IStateProps {
     addingNewDate: boolean;
     listTypeOptions: string[];
     nuevaPlanilla: boolean;
+    token: IToken | null;
 }
 
 interface IDispatchProps {
@@ -40,12 +42,13 @@ class ManageUpload extends React.Component<IProps, {}> {
 
     public render() {
         return (
-            <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error} initAction={this.props.init} loaded={false} >
+            <SecuredComponent fallbackUrl="/" token={this.props.token}>
+                <ActivityAndErrorIndicator loading={this.props.loading} error={this.props.error} initAction={this.props.init} loaded={false} >
                     <h1>Administrar la carga de listas</h1>
                     <p>Fecha selecionada: <b>{this.props.selectedDate.fecha}</b></p>
                     <Container>
                         {this.props.addingNewDate ? (
-                            <Row>                               
+                            <Row>
                                 <Col sm={{ size: 4 }}>
                                     <ButtonGroup>
                                         <DatePicker onChange={this.dateChange} clearIcon={null} value={this.getDate()} locale="es-419" />
@@ -68,18 +71,19 @@ class ManageUpload extends React.Component<IProps, {}> {
                         <br />
                         <Row>
                             <Col>
-                                <UploadPrices 
-                                    uploadForm={this.props.uploadForm} 
-                                    selectedDate={this.props.selectedDate} 
-                                    filteredlistOptions={this.props.filteredlistOptions} 
-                                    deleteList={this.props.deleteList} 
+                                <UploadPrices
+                                    uploadForm={this.props.uploadForm}
+                                    selectedDate={this.props.selectedDate}
+                                    filteredlistOptions={this.props.filteredlistOptions}
+                                    deleteList={this.props.deleteList}
                                     listTypeOptions={this.props.listTypeOptions}
-                                    nuevaPlanilla={this.props.nuevaPlanilla} 
-                                    toggleNuevaPlanilla={this.props.toggleNuevaPlanilla}/>
+                                    nuevaPlanilla={this.props.nuevaPlanilla}
+                                    toggleNuevaPlanilla={this.props.toggleNuevaPlanilla} />
                             </Col>
                         </Row>
                     </Container>
-            </ActivityAndErrorIndicator>
+                </ActivityAndErrorIndicator>
+            </SecuredComponent>
         );
     }
 

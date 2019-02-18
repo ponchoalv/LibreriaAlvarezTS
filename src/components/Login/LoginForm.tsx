@@ -8,6 +8,7 @@ import Form from 'reactstrap/lib/Form';
 import FormGroup from 'reactstrap/lib/FormGroup';
 import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
+import Alert from 'reactstrap/lib/Alert';
 
 
 interface IDataProps {
@@ -29,25 +30,28 @@ function LoginForm(props: IProps) {
         props.login(form);
     }
 
-    return (     
+    return (
+        <>
             <Card className="border-primary">
-            <CardHeader><h4>Login Libreria Alvarez</h4></CardHeader>
-            <Form onSubmit={loginAction} >
-                <CardBody>
-                    <FormGroup>
-                        <Label for="username">Nombre de Usuario:</Label>
-                        <Input type="text" name="username" id="username"/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="password">Contraseña:</Label>
-                        <Input type="password" name="password" id="password" />
-                    </FormGroup>
-                </CardBody>
-                <CardFooter>
-                    <Button color="primary">Login</Button>{'  '}
-                </CardFooter>
-            </Form>
-        </Card>
+                <CardHeader><h4>Login Libreria Alvarez</h4></CardHeader>
+                <Form onSubmit={loginAction} >
+                    <CardBody>
+                        <FormGroup>
+                            <Label for="username">Nombre de Usuario:</Label>
+                            <Input type="text" name="username" id="username" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="password">Contraseña:</Label>
+                            <Input type="password" name="password" id="password" />
+                        </FormGroup>
+                    </CardBody>
+                    <CardFooter>
+                        <Button color="primary">Login</Button>{'  '}
+                    </CardFooter>
+                </Form>
+            </Card>
+            {props.error && <Alert color="danger">Error: {props.error.message}</Alert>}
+        </>
     )
 }
 
