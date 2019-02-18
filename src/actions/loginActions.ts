@@ -2,44 +2,44 @@ import * as constants from '../constants/login';
 
 import {
     IToken
-    } from '../types/index';
+} from '../types/index';
 
 export interface IRequestLogin {
-    data: FormData;
+    payload: FormData;
     type: constants.REQUEST_LOGIN;
 }
 export interface ILoginSuccessful {
-    data: IToken
+    payload: IToken;
     type: constants.LOGIN_SUCCESSFUL;
 }
 export interface ILoginFailed {
-    error: Error;
+    payload: Error;
     type: constants.LOGIN_FAILED;
 }
 
-export type LoginAction = 
+export type LoginAction =
     | IRequestLogin
-    | ILoginSuccessful
-    | ILoginFailed;
+    | ILoginFailed
+    | ILoginSuccessful;
 
 export function RequestLogin(data: FormData): LoginAction {
     return {
-        data,
+        payload: data,
         type: constants.REQUEST_LOGIN,
     }
 }
 
 export function LoginSuccesFul(data: IToken): LoginAction {
     return {
-        data,
+        payload: data,
         type: constants.LOGIN_SUCCESSFUL,
-        
+
     }
 }
 
 export function LoginFailed(error: Error): LoginAction {
     return {
-        error,
+        payload: error,
         type: constants.LOGIN_FAILED,
     }
 }

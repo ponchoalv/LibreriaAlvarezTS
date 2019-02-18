@@ -33,6 +33,7 @@ export interface IStoreState {
     readonly prices: IPricesState;
     readonly router: RouterState;
     readonly upload: IManageUploadState;
+    readonly login: ILoginState;
 }
 
 export interface IDateOfList {

@@ -1,11 +1,11 @@
 import { connectRouter } from 'connected-react-router';
 import { History } from 'history';
 import { combineReducers, LoopReducer } from 'redux-loop';
+import { login } from './login';
 import { PriceFetchAction, UploadListAction, LoginAction } from '../actions';
 import { IManageUploadState, IPricesState, IStoreState, ILoginState } from '../types';
 import { prices } from './prices';
 import { upload } from './upload';
-import { login } from './login';
 
 
 const rootReducer = (history: History) => combineReducers<
