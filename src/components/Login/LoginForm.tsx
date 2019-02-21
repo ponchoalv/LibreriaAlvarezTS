@@ -9,6 +9,9 @@ import FormGroup from 'reactstrap/lib/FormGroup';
 import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Alert from 'reactstrap/lib/Alert';
+import Container from 'reactstrap/lib/Container';
+import Row from 'reactstrap/lib/Row';
+import Col from 'reactstrap/lib/Col';
 
 
 interface IDataProps {
@@ -31,27 +34,33 @@ function LoginForm(props: IProps) {
     }
 
     return (
-        <>
-            <Card className="border-primary">
-                <CardHeader><h4>Login Libreria Alvarez</h4></CardHeader>
-                <Form onSubmit={loginAction} >
-                    <CardBody>
-                        <FormGroup>
-                            <Label for="username">Nombre de Usuario:</Label>
-                            <Input type="text" name="username" id="username" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="password">Contraseña:</Label>
-                            <Input type="password" name="password" id="password" />
-                        </FormGroup>
-                    </CardBody>
-                    <CardFooter>
-                        <Button color="primary">Login</Button>{'  '}
-                    </CardFooter>
-                </Form>
-            </Card>
-            {props.error && <Alert color="danger">Error: {props.error.message}</Alert>}
-        </>
+        <Container>
+            <Row>
+                <Col className="login col-sm-9 col-md-7 col-lg-5 mx-auto" >
+                    <Card className="border-primary">
+                        <CardHeader>
+                            <h4>Login Libreria Alvarez</h4>
+                        </CardHeader>
+                        <Form onSubmit={loginAction} >
+                            <CardBody>
+                                <FormGroup>
+                                    <Label for="username">Nombre de Usuario:</Label>
+                                    <Input type="text" name="username" id="username" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="password">Contraseña:</Label>
+                                    <Input type="password" name="password" id="password" />
+                                </FormGroup>
+                            </CardBody>
+                            <CardFooter>
+                                <Button color="primary">Login</Button>{'  '}
+                            </CardFooter>
+                        </Form>
+                    </Card>
+                    {props.error && <Alert color="danger">Error: {props.error.message}</Alert>}
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
