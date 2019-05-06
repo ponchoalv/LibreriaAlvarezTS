@@ -17,13 +17,9 @@ interface IDispatchProps {
 type IProps = IStateProps & IDispatchProps;
 
 class Login extends React.Component<IProps, {}> {
-    constructor(props: IProps) {
-        super(props);
-    }
 
     private nothing: () => void = () => {};
     
-
     public render() {
         if (this.props.token) {
             return <Redirect to='/users' />

@@ -188,6 +188,6 @@ export const upload: LoopReducer<IManageUploadState, UploadListAction> =
                     ...state,
                     nuevaPlanilla: !state.nuevaPlanilla
                 }
+            default: return state;
         }
-        return state;
     }

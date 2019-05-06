@@ -33,10 +33,6 @@ interface IDispatchProps {
 export type IProps = IStateProps & IDispatchProps;
 
 class ListPrices extends React.Component<IProps, {}> {
-    constructor(props: IProps) {
-        super(props);
-    }
-
     public render() {
         return (
             <SecuredComponent fallbackUrl="/" token={this.props.token}>

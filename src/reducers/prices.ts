@@ -126,6 +126,6 @@ export const prices: LoopReducer<IPricesState, PriceFetchAction> =
                     selectedDate: action.value,
                     selectedList: "",
                 }, loadPrices(action.value.fecha))
+            default: return state;
         }
-        return state;
     }

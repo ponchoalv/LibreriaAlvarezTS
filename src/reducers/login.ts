@@ -51,6 +51,6 @@ export const login: LoopReducer<ILoginState, LoginAction> =
                     loading: false,
                     loginToken: null,
                 };
-            }
-            return state;
+            default: return state;
+            }            
     }
