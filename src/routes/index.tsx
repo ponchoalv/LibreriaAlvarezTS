@@ -5,7 +5,7 @@ import { IRoutesProps, IStoreState, ILoginState } from "../types";
 import Login from "../containers/Login";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
 import { Logout } from "../actions/loginActions";
 
 const history = createBrowserHistory();
@@ -29,11 +29,11 @@ const mapStateToProps = ({ login }: IStoreState) => {
   return {
     login
   };
-}
+};
 
 const mapDispatchToProps = {
   logout: Logout
-}
+};
 
 interface IProps {
   login: ILoginState;
@@ -53,16 +53,21 @@ const Routes = (props: IProps) => (
           return <Redirect to="/users" />;
         }}
       />
-      <Route exact path="/users/logout" component={
-        () => {
-          props.logout()
-          return <Redirect to="/" />
-        }
-      } />
+      <Route
+        exact
+        path="/users/logout"
+        component={() => {
+          props.logout();
+          return <Redirect to="/" />;
+        }}
+      />
       <Route path="/users" render={Secured} />
       <Route component={NoMatch} />
     </Switch>
   </Router>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Routes);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Routes);
