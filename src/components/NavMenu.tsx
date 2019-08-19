@@ -34,7 +34,7 @@ export default class NavMenu extends React.Component<IRoutesProps, IState> {
                 <Collapse isOpen={this.state.isOpen} navbar={true}>
                     <Nav vertical={true}>
                         <NavItem className="px-3">
-                            <NavLink tag={RRNavLink} exact={true} to={`${this.props.match.url}`} activeClassName="active">
+                            <NavLink tag={RRNavLink} exact={true} to={`/`} activeClassName="active">
                                 <span className="oi oi-home" aria-hidden="true" />Home
                             </NavLink>
                         </NavItem>
