@@ -85,3 +85,21 @@ export async function eliminarLista(lista: IDeleteListData): Promise<number> {
 
     return await response.json();
 }
+
+export const cargaVenta = async (monto: number, usuario: string): Promise<number> => {
+    const response = await fetch('/api/add-venta',
+    {
+        body: JSON.stringify({
+            monto,
+            usuario
+        }),
+        headers: { 'Content-type': 'application/json' },
+        method: 'POST',
+    });
+
+    if(!response.ok){
+        throw new Error(response.statusText);
+    }
+
+    return await response.json();
+}
