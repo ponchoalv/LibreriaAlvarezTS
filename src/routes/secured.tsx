@@ -17,9 +17,9 @@ const Secured = ({ match }: IRoutesProps) =>
             </div>
             <div className="content px-4">
                 <Switch>
-                    <Route exact={true} path={`${match.url}`} component={Home} />
-                    <Route exact={true} path={`${match.url}/list`} component={ListPrices} />
-                    <Route exact={true} path={`${match.url}/upload`} component={ManageUpload} />
+                    <Route exact path={`${match.url}`} component={Home} />
+                    <Route exact path={`${match.url}/list`} component={ListPrices} />
+                    <Route exact path={`${match.url}/upload`} component={ManageUpload} />
                     <Route component={NoMatch} />
                 </Switch>
             </div>

@@ -61,7 +61,15 @@ const Routes = (props: IProps) => (
           return <Redirect to="/" />;
         }}
       />
-      <Route path="/users" render={Secured} />
+      <Route
+        path="/users"
+        component={({ match }: IRoutesProps) => {
+          if (props.login.loginToken === null) {
+            return <Login />;
+          }
+          return <Secured match={match} />;
+        }}
+      />
       <Route component={NoMatch} />
     </Switch>
   </Router>

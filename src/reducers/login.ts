@@ -8,7 +8,8 @@ import { LoginSuccesFul, LoginFailed } from "../actions/loginActions";
 const initialState: ILoginState = {
   error: null,
   loading: false,
-  loginToken: null
+  loginToken: null,
+  username: null,
 };
 
 const loginApi: (data: FormData) => RunCmd<LoginAction> = (data: FormData) =>
@@ -28,12 +29,13 @@ export const login: LoopReducer<ILoginState, LoginAction> = (
         {
           ...state,
           error: null,
-          loading: true
+          loading: true,
+          username: action.payload.get('username')
         },
         loginApi(action.payload)
       );
     case constants.LOGIN_SUCCESSFUL:
-      return {
+      return {...state,
         error: null,
         loading: false,
         loginToken: action.payload
@@ -42,7 +44,8 @@ export const login: LoopReducer<ILoginState, LoginAction> = (
       return {
         error: action.payload,
         loading: false,
-        loginToken: null
+        loginToken: null, 
+        username: null
       };
     case constants.LOGOUT:
       return initialState;
