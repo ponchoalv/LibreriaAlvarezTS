@@ -83,7 +83,7 @@ export interface ILoginState {
     readonly error: Error | null;
     readonly loading: boolean;
     readonly loginToken: IToken | null;
-    readonly username: String | null;
+    readonly username: string | null;
 }
 
 export interface IVenta {

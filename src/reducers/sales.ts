@@ -3,13 +3,15 @@ import { SalesActions } from "../actions";
 import {
   FaildOnFetch,
   LoadFetchedDates,
-  LoadFetchedSales
+  LoadFetchedSales,
+  FetchSales
 } from "../actions/salesActions";
 import * as constants from "../constants/sales";
 import { ISalesState } from "../types/index";
 import {
   obtenerFechasConVentas,
-  obtenerVentasPorFecha
+  obtenerVentasPorFecha,
+  cargaVenta,
 } from "../api";
 
 const initialState: ISalesState = {
@@ -35,6 +37,13 @@ const loadDates: () => RunCmd<SalesActions> = () =>
     failActionCreator: FaildOnFetch,
     successActionCreator: LoadFetchedDates
   });
+
+const addSale: (monto:number, username:string) => RunCmd<SalesActions> = (monto:number, username:string) =>
+Cmd.run(cargaVenta, {
+  args:[monto, username],
+  failActionCreator: FaildOnFetch,
+  successActionCreator: FetchSales
+})
 
 export const sales: LoopReducer<ISalesState, SalesActions> = (
   state = initialState,
@@ -62,6 +71,11 @@ export const sales: LoopReducer<ISalesState, SalesActions> = (
         loading: false,
         loaded: true
       };
+    case constants.ADD_SALE:
+        return loop({
+          ...state,
+          loading: true
+        }, addSale(action.data.monto, action.data.username))
     case constants.FAILED_FETCH:
       return { ...state, error: action.error, loading: false };
     case constants.SELECT_DATE:

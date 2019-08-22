@@ -12,7 +12,8 @@ export function mapStateToProps({ sales, login }: IStoreState) {
       loading: sales.loading,
       error: sales.error,
       selectedDate: {fecha: sales.selectedDate},
-      datesLoaded: sales.datesLoaded
+      datesLoaded: sales.datesLoaded,
+      username: (login.username ? login.username : '')
     }
 }
     
@@ -20,6 +21,7 @@ export function mapDispatchToProps(dispatch: Dispatch<SalesActions>) {
     return {
         init: () => dispatch(actions.FetchSales()),
         selectedDateChanged: (value: IDateOfList) => dispatch(actions.SelectDate(value.fecha)),
+        addSale: (monto: number, username: string) => dispatch(actions.AddSale(monto,username))
     }
 }
 
