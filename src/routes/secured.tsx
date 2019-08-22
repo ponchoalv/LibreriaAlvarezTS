@@ -5,6 +5,7 @@ import Home from '../components/Home';
 import NavMenu from '../components/NavMenu';
 import NoMatch from '../components/NoMatch';
 import ListPrices from '../containers/ListPrices';
+import Sales from '../containers/Sales';
 import ManageUpload from '../containers/ManageUpload';
 import { IRoutesProps } from '../types';
 
@@ -20,6 +21,7 @@ const Secured = ({ match }: IRoutesProps) =>
                     <Route exact path={`${match.url}`} component={Home} />
                     <Route exact path={`${match.url}/list`} component={ListPrices} />
                     <Route exact path={`${match.url}/upload`} component={ManageUpload} />
+                    <Route exact path={`${match.url}/sales`} component={Sales} />
                     <Route component={NoMatch} />
                 </Switch>
             </div>

@@ -49,6 +49,11 @@ export default class NavMenu extends React.Component<IRoutesProps, IState> {
                             </NavLink>
                         </NavItem>
                         <NavItem className="px-3">
+                            <NavLink tag={RRNavLink} to={`${this.props.match.url}/sales`} activeClassName="active">
+                                <span className="oi oi-dollar" aria-hidden="true" />Ventas
+                            </NavLink>
+                        </NavItem>
+                        <NavItem className="px-3">
                             <NavLink tag={RRNavLink} to={`${this.props.match.url}/logout`} activeClassName="active">
                                 <span className="oi oi-account-logout" aria-hidden="true" />Logout
                             </NavLink>

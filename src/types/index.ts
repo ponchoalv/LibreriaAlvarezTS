@@ -29,11 +29,21 @@ export interface IPricesState {
     readonly datesLoaded: IDateOfList[];
 }
 
+export interface ISalesState {
+    readonly sales: IVenta[];
+    readonly loading: boolean;
+    readonly loaded: boolean;
+    readonly error: Error | null;
+    readonly selectedDate: string;
+    readonly datesLoaded: IDateOfList[];
+}
+
 export interface IStoreState {
     readonly prices: IPricesState;
     readonly router: RouterState;
     readonly upload: IManageUploadState;
     readonly login: ILoginState;
+    readonly sales: ISalesState;
 }
 
 export interface IDateOfList {
@@ -74,4 +84,10 @@ export interface ILoginState {
     readonly loading: boolean;
     readonly loginToken: IToken | null;
     readonly username: String | null;
+}
+
+export interface IVenta {
+    fecha: string;
+    monto: number;
+    usuario: string;
 }
