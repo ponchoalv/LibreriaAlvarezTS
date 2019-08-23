@@ -12,6 +12,7 @@ import {
   obtenerFechasConVentas,
   obtenerVentasPorFecha,
   cargaVenta,
+  eliminarVenta
 } from "../api";
 
 const initialState: ISalesState = {
@@ -38,12 +39,22 @@ const loadDates: () => RunCmd<SalesActions> = () =>
     successActionCreator: LoadFetchedDates
   });
 
-const addSale: (monto:number, username:string) => RunCmd<SalesActions> = (monto:number, username:string) =>
-Cmd.run(cargaVenta, {
-  args:[monto, username],
-  failActionCreator: FaildOnFetch,
-  successActionCreator: FetchSales
-})
+const addSale: (monto: number, username: string) => RunCmd<SalesActions> = (
+  monto: number,
+  username: string
+) =>
+  Cmd.run(cargaVenta, {
+    args: [monto, username],
+    failActionCreator: FaildOnFetch,
+    successActionCreator: FetchSales
+  });
+
+const deleteSale: (fecha: string) => RunCmd<SalesActions> = (fecha: string) =>
+  Cmd.run(eliminarVenta, {
+    args: [fecha],
+    failActionCreator: FaildOnFetch,
+    successActionCreator: FetchSales
+  });
 
 export const sales: LoopReducer<ISalesState, SalesActions> = (
   state = initialState,
@@ -72,10 +83,21 @@ export const sales: LoopReducer<ISalesState, SalesActions> = (
         loaded: true
       };
     case constants.ADD_SALE:
-        return loop({
+      return loop(
+        {
           ...state,
           loading: true
-        }, addSale(action.data.monto, action.data.username))
+        },
+        addSale(action.data.monto, action.data.username)
+      );
+    case constants.DELETE_SALE:
+      return loop(
+        {
+          ...state,
+          loading: true
+        },
+        deleteSale(action.data.fecha)
+      );
     case constants.FAILED_FETCH:
       return { ...state, error: action.error, loading: false };
     case constants.SELECT_DATE:

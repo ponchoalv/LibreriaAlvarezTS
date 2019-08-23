@@ -53,7 +53,7 @@ const Sales = (props: IProps) => {
           El día <b>{props.selectedDate.fecha}</b> se realizaron {" "}
           <b>{props.sales.length}</b> ventas, sumando <b>{formatter.format(totalVentas)}</b>
         </p>
-        <Container>
+        <Container className="xs">
           <Row>
             <Col sm={{ size: 4 }}>
               <SelectDate

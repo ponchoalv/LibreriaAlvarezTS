@@ -34,12 +34,20 @@ export interface IAddSale {
   };
 }
 
+export interface IDeleteSale {
+  type: constants.DELETE_SALE;
+  data: {
+    fecha: string;
+  };
+}
+
 export type SalesActions =
   | InitPriceFetch
   | IFailOnFetch
   | ISuccessfulDatesFetched
   | IUpdateSelectedDate
   | ISuccessfulSalesFetched
+  | IDeleteSale
   | IAddSale;
 
 export function FetchSales(): SalesActions {
@@ -83,5 +91,14 @@ export function AddSale(monto: number, username: string): SalesActions {
       username
     },
     type: constants.ADD_SALE
+  };
+}
+
+export function DeleteSale(fecha: string): SalesActions {
+  return {
+    data: {
+      fecha: fecha
+    },
+    type: constants.DELETE_SALE
   };
 }

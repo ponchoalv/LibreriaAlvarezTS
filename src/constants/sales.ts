@@ -15,3 +15,6 @@ export type FAILED_FETCH = typeof FAILED_FETCH;
 
 export const ADD_SALE = "@@SALES/ADD_SALE";
 export type ADD_SALE = "@@SALES/ADD_SALE";
+
+export const DELETE_SALE = "@@SALES/DELETE_SALE";
+export type DELETE_SALE = "@@SALES/DELETE_SALE";

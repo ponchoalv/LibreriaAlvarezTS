@@ -131,3 +131,19 @@ export const obtenerVentasPorFecha = async (
 export const obtenerFechasConVentas = (): Promise<IDateOfList[]> => {
   return ApiTemplate<IDateOfList[]>("/api/get-fechas-con-ventas");
 };
+
+export const eliminarVenta = async (fecha: string): Promise<Number> => {
+  const response = await fetch("/api/remove-sale-by-date", {
+    body: JSON.stringify({
+      fecha
+    }),
+    headers: { "Content-type": "application/json" },
+    method: "POST"
+  });
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return await response.json();
+}

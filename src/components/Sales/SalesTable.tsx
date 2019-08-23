@@ -19,6 +19,7 @@ function PriceTable({ rows }: IProps) {
                         <th>Fecha</th>
                         <th>Usuario</th>
                         <th>Monto</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>

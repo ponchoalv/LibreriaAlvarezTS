@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, InputGroup, InputGroupAddon } from "reactstrap";
+import { Input, InputGroup, InputGroupAddon, Form } from "reactstrap";
 
 export interface IDispatchProps {
   cargarMonto: (value: number) => void;
@@ -18,7 +18,7 @@ function SearchInput({ cargarMonto }: IProps) {
   return (
     <InputGroup>
       <InputGroupAddon addonType="prepend">Monto</InputGroupAddon>
-      <form onSubmit={enviarMonto}>
+      <Form onSubmit={enviarMonto}>
       <Input
         type="number"
         min="0.0"
@@ -26,7 +26,7 @@ function SearchInput({ cargarMonto }: IProps) {
         placeholder="Monto de la venta"
         name="monto"
       />
-      </form>
+      </Form>
     </InputGroup>
   );
 }
